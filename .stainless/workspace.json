@@ -1,0 +1,13 @@
+{
+  "project": "axiora",
+  "openapi_spec": "../openapi.json",
+  "stainless_config": "stainless.yml",
+  "targets": {
+    "openapi": {
+      "output_path": "../sdks/axiora-openapi"
+    },
+    "python": {
+      "output_path": "../sdks/axiora-python"
+    }
+  }
+}
