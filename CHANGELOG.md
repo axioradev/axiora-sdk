@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.3 (2026-02-24)
+
+Full Changelog: [v0.0.2...v0.0.3](https://github.com/axioradev/axiora-sdk/compare/v0.0.2...v0.0.3)
+
+### Chores
+
+* update SDK settings ([cee414e](https://github.com/axioradev/axiora-sdk/commit/cee414ecf848b71dc1e5c4f74ad57a79868e8834))
+* update SDK settings ([4d1ea9f](https://github.com/axioradev/axiora-sdk/commit/4d1ea9f2f2c067852d4b4db689a8f093dd033181))
+
 ## 0.0.2 (2026-02-24)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/axioradev/axiora-sdk/compare/v0.0.1...v0.0.2)
