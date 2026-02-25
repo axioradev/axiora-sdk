@@ -12,6 +12,8 @@ class Ratio(BaseModel):
 
     bps: Optional[float] = None
 
+    current_ratio: Optional[float] = None
+
     debt_to_equity: Optional[float] = None
 
     dividends_per_share: Optional[float] = None
@@ -19,6 +21,10 @@ class Ratio(BaseModel):
     eps: Optional[float] = None
 
     equity_ratio: Optional[float] = None
+
+    gross_margin: Optional[float] = None
+
+    interest_coverage: Optional[float] = None
 
     net_margin: Optional[float] = None
 

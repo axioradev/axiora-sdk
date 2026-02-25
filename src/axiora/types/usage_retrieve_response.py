@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, Dict
+from typing import TYPE_CHECKING, Dict, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -14,6 +14,8 @@ class Data(BaseModel):
     key_prefix: str
 
     tier: str
+
+    requests_today: Optional[int] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a

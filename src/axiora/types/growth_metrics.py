@@ -10,6 +10,8 @@ __all__ = ["GrowthMetrics"]
 class GrowthMetrics(BaseModel):
     eps: Optional[float] = None
 
+    gross_profit: Optional[float] = None
+
     net_income: Optional[float] = None
 
     operating_income: Optional[float] = None
