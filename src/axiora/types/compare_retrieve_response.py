@@ -12,7 +12,13 @@ __all__ = ["CompareRetrieveResponse", "Data", "DataFinancials", "DataRatios"]
 class DataFinancials(BaseModel):
     bps: Optional[float] = None
 
+    current_assets: Optional[int] = None
+
+    current_liabilities: Optional[int] = None
+
     eps: Optional[float] = None
+
+    gross_profit: Optional[int] = None
 
     net_income: Optional[int] = None
 
