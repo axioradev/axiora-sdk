@@ -12,6 +12,12 @@ __all__ = ["ScreenRetrieveResponse", "Data", "DataFinancials", "DataMetrics"]
 class DataFinancials(BaseModel):
     fiscal_year: int
 
+    current_assets: Optional[int] = None
+
+    current_liabilities: Optional[int] = None
+
+    gross_profit: Optional[int] = None
+
     net_income: Optional[int] = None
 
     operating_income: Optional[int] = None
