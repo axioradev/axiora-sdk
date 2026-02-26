@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2026-02-25)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/axioradev/axiora-sdk/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([9fcbdd7](https://github.com/axioradev/axiora-sdk/commit/9fcbdd703ac269e87ca130856b330f9fcd2da43f))
+
 ## 0.2.0 (2026-02-25)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/axioradev/axiora-sdk/compare/v0.1.0...v0.2.0)
