@@ -9,5 +9,7 @@ __all__ = ["CompanyRetrieveGrowthResponse"]
 
 class CompanyRetrieveGrowthResponse(BaseModel):
     data: Growth
+    """The requested resource object."""
 
     meta: Meta
+    """Request metadata."""

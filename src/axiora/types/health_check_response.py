@@ -7,3 +7,4 @@ __all__ = ["HealthCheckResponse"]
 
 class HealthCheckResponse(BaseModel):
     status: str
+    """Service status: 'ok' or 'degraded'."""

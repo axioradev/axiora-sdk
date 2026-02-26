@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Union, Optional
+from datetime import datetime
 
 import httpx
 
@@ -62,6 +63,7 @@ class CompaniesResource(SyncAPIResource):
         code: str,
         *,
         expand: Optional[str] | Omit = omit,
+        peer_limit: int | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -75,7 +77,9 @@ class CompaniesResource(SyncAPIResource):
 
         Args:
           expand: Comma-separated sub-resources to include: financials, ratios, growth, peers,
-              segments, translations, health_score
+              segments, translations, health_score. Use 'all' for everything.
+
+          peer_limit: Max peers to return (default 10)
 
           extra_headers: Send extra headers
 
@@ -97,6 +101,7 @@ class CompaniesResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "expand": expand,
+                        "peer_limit": peer_limit,
                         "years": years,
                     },
                     company_retrieve_params.CompanyRetrieveParams,
@@ -114,6 +119,7 @@ class CompaniesResource(SyncAPIResource):
         offset: int | Omit = omit,
         sector: Optional[str] | Omit = omit,
         securities_code: Optional[str] | Omit = omit,
+        since: Union[str, datetime, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -130,6 +136,9 @@ class CompaniesResource(SyncAPIResource):
           limit: Results per page
 
           offset: Results to skip (ignored when cursor is set)
+
+          since: Return companies updated after this timestamp (ISO 8601). Use the sync_token
+              from a previous response.
 
           extra_headers: Send extra headers
 
@@ -154,6 +163,7 @@ class CompaniesResource(SyncAPIResource):
                         "offset": offset,
                         "sector": sector,
                         "securities_code": securities_code,
+                        "since": since,
                     },
                     company_list_params.CompanyListParams,
                 ),
@@ -436,6 +446,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         code: str,
         *,
         expand: Optional[str] | Omit = omit,
+        peer_limit: int | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -449,7 +460,9 @@ class AsyncCompaniesResource(AsyncAPIResource):
 
         Args:
           expand: Comma-separated sub-resources to include: financials, ratios, growth, peers,
-              segments, translations, health_score
+              segments, translations, health_score. Use 'all' for everything.
+
+          peer_limit: Max peers to return (default 10)
 
           extra_headers: Send extra headers
 
@@ -471,6 +484,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "expand": expand,
+                        "peer_limit": peer_limit,
                         "years": years,
                     },
                     company_retrieve_params.CompanyRetrieveParams,
@@ -488,6 +502,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         offset: int | Omit = omit,
         sector: Optional[str] | Omit = omit,
         securities_code: Optional[str] | Omit = omit,
+        since: Union[str, datetime, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -504,6 +519,9 @@ class AsyncCompaniesResource(AsyncAPIResource):
           limit: Results per page
 
           offset: Results to skip (ignored when cursor is set)
+
+          since: Return companies updated after this timestamp (ISO 8601). Use the sync_token
+              from a previous response.
 
           extra_headers: Send extra headers
 
@@ -528,6 +546,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
                         "offset": offset,
                         "sector": sector,
                         "securities_code": securities_code,
+                        "since": since,
                     },
                     company_list_params.CompanyListParams,
                 ),

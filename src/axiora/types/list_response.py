@@ -11,5 +11,7 @@ __all__ = ["ListResponse"]
 
 class ListResponse(BaseModel):
     data: List[Company]
+    """Array of result objects."""
 
     meta: Meta
+    """Pagination and request metadata."""

@@ -11,5 +11,7 @@ __all__ = ["FilingRetrieveTranslationsResponse"]
 
 class FilingRetrieveTranslationsResponse(BaseModel):
     data: List[Translation]
+    """Array of result objects."""
 
     meta: Meta
+    """Pagination and request metadata."""

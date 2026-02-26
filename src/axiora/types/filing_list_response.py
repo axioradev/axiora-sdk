@@ -11,5 +11,7 @@ __all__ = ["FilingListResponse"]
 
 class FilingListResponse(BaseModel):
     data: List[Filing]
+    """Array of result objects."""
 
     meta: Meta
+    """Pagination and request metadata."""

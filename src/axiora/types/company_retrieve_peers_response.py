@@ -11,5 +11,7 @@ __all__ = ["CompanyRetrievePeersResponse"]
 
 class CompanyRetrievePeersResponse(BaseModel):
     data: List[Peer]
+    """Array of result objects."""
 
     meta: Meta
+    """Pagination and request metadata."""
