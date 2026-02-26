@@ -73,6 +73,8 @@ class Financial(BaseModel):
 
     investment_securities: Optional[int] = None
 
+    is_consolidated: Optional[bool] = None
+
     net_assets: Optional[int] = None
 
     net_income: Optional[int] = None
