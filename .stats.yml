@@ -1,4 +1,4 @@
 configured_endpoints: 32
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/axiora%2Faxiora-af89affc4582b3766854bddb3cd75e6dbb0ab0a2549f361198bdb3039e3413d2.yml
-openapi_spec_hash: c2803658f90a780a25ce1fcb14d03c82
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/axiora%2Faxiora-29f94f8fae05bc4da10fb097bcf27d63649445d75d137f0e636574b00dab681a.yml
+openapi_spec_hash: 4ed2589fda5da3be5205c9e21f48523b
 config_hash: 6d7f34ea9ca65277ac5cec9378f752c0

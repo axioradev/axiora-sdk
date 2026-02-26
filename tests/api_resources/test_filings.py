@@ -15,7 +15,7 @@ from axiora.types import (
     FilingRetrieveResponse,
     FilingRetrieveTranslationsResponse,
 )
-from axiora._utils import parse_date
+from axiora._utils import parse_date, parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -82,6 +82,7 @@ class TestFilings:
             doc_type="doc_type",
             limit=1,
             offset=0,
+            since=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(FilingListResponse, filing, path=["response"])
 
@@ -257,6 +258,7 @@ class TestAsyncFilings:
             doc_type="doc_type",
             limit=1,
             offset=0,
+            since=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(FilingListResponse, filing, path=["response"])
 

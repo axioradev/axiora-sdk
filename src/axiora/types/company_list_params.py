@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import TypedDict
+from typing import Union, Optional
+from datetime import datetime
+from typing_extensions import Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["CompanyListParams"]
 
@@ -23,3 +26,9 @@ class CompanyListParams(TypedDict, total=False):
     sector: Optional[str]
 
     securities_code: Optional[str]
+
+    since: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+    """Return companies updated after this timestamp (ISO 8601).
+
+    Use the sync_token from a previous response.
+    """

@@ -11,14 +11,19 @@ __all__ = ["Meta"]
 
 class Meta(BaseModel):
     request_id: str
+    """Unique request identifier for tracing and support (e.g. 'req_abc123')."""
 
     limit: Optional[int] = None
+    """Maximum records returned per page."""
 
     next_cursor: Optional[str] = None
+    """Opaque cursor for the next page (keyset pagination). Null on the last page."""
 
     offset: Optional[int] = None
+    """Number of records skipped (offset-based pagination)."""
 
     total: Optional[int] = None
+    """Total number of matching records (list endpoints only)."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a

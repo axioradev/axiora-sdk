@@ -12,7 +12,10 @@ class CompanyRetrieveParams(TypedDict, total=False):
     expand: Optional[str]
     """
     Comma-separated sub-resources to include: financials, ratios, growth, peers,
-    segments, translations, health_score
+    segments, translations, health_score. Use 'all' for everything.
     """
+
+    peer_limit: int
+    """Max peers to return (default 10)"""
 
     years: int

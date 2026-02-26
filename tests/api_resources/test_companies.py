@@ -18,6 +18,7 @@ from axiora.types import (
     CompanyRetrieveRatiosResponse,
     CompanyRetrieveFinancialsResponse,
 )
+from axiora._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -39,6 +40,7 @@ class TestCompanies:
         company = client.companies.retrieve(
             code="code",
             expand="expand",
+            peer_limit=1,
             years=1,
         )
         assert_matches_type(CompanyRetrieveResponse, company, path=["response"])
@@ -93,6 +95,7 @@ class TestCompanies:
             offset=0,
             sector="sector",
             securities_code="securities_code",
+            since=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(ListResponse, company, path=["response"])
 
@@ -428,6 +431,7 @@ class TestAsyncCompanies:
         company = await async_client.companies.retrieve(
             code="code",
             expand="expand",
+            peer_limit=1,
             years=1,
         )
         assert_matches_type(CompanyRetrieveResponse, company, path=["response"])
@@ -482,6 +486,7 @@ class TestAsyncCompanies:
             offset=0,
             sector="sector",
             securities_code="securities_code",
+            since=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(ListResponse, company, path=["response"])
 

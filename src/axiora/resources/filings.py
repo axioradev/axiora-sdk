@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union, Optional
-from datetime import date
+from datetime import date, datetime
 
 import httpx
 
@@ -90,6 +90,7 @@ class FilingsResource(SyncAPIResource):
         doc_type: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        since: Union[str, datetime, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -115,6 +116,9 @@ class FilingsResource(SyncAPIResource):
 
           offset: Results to skip (ignored when cursor is set)
 
+          since: Return filings received after this timestamp (ISO 8601). Use the sync_token from
+              a previous response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -139,6 +143,7 @@ class FilingsResource(SyncAPIResource):
                         "doc_type": doc_type,
                         "limit": limit,
                         "offset": offset,
+                        "since": since,
                     },
                     filing_list_params.FilingListParams,
                 ),
@@ -292,6 +297,7 @@ class AsyncFilingsResource(AsyncAPIResource):
         doc_type: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        since: Union[str, datetime, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -317,6 +323,9 @@ class AsyncFilingsResource(AsyncAPIResource):
 
           offset: Results to skip (ignored when cursor is set)
 
+          since: Return filings received after this timestamp (ISO 8601). Use the sync_token from
+              a previous response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -341,6 +350,7 @@ class AsyncFilingsResource(AsyncAPIResource):
                         "doc_type": doc_type,
                         "limit": limit,
                         "offset": offset,
+                        "since": since,
                     },
                     filing_list_params.FilingListParams,
                 ),

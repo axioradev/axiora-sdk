@@ -9,5 +9,7 @@ __all__ = ["CompanyRetrieveHealthResponse"]
 
 class CompanyRetrieveHealthResponse(BaseModel):
     data: HealthScore
+    """The requested resource object."""
 
     meta: Meta
+    """Request metadata."""
