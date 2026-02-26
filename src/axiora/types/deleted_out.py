@@ -7,12 +7,18 @@ __all__ = ["DeletedOut", "Data"]
 
 
 class Data(BaseModel):
+    """The requested resource object."""
+
     id: int
+    """ID of the deleted resource."""
 
     deleted: bool
+    """True if the resource was successfully deleted."""
 
 
 class DeletedOut(BaseModel):
     data: Data
+    """The requested resource object."""
 
     meta: Meta
+    """Request metadata."""

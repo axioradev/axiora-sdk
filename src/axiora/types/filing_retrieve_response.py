@@ -9,5 +9,7 @@ __all__ = ["FilingRetrieveResponse"]
 
 class FilingRetrieveResponse(BaseModel):
     data: Filing
+    """The requested resource object."""
 
     meta: Meta
+    """Request metadata."""

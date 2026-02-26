@@ -11,11 +11,16 @@ __all__ = ["UsageRetrieveResponse", "Data"]
 
 
 class Data(BaseModel):
+    """The requested resource object."""
+
     key_prefix: str
+    """First 8 characters of the API key for identification."""
 
     tier: str
+    """Current pricing tier (e.g. 'free', 'pro')."""
 
     requests_today: Optional[int] = None
+    """Number of API requests made today."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -32,5 +37,7 @@ class Data(BaseModel):
 
 class UsageRetrieveResponse(BaseModel):
     data: Data
+    """The requested resource object."""
 
     meta: Meta
+    """Request metadata."""

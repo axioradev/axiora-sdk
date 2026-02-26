@@ -11,5 +11,7 @@ __all__ = ["CompanyRetrieveFinancialsResponse"]
 
 class CompanyRetrieveFinancialsResponse(BaseModel):
     data: List[Financial]
+    """Array of result objects."""
 
     meta: Meta
+    """Pagination and request metadata."""

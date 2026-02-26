@@ -12,20 +12,28 @@ __all__ = ["BulkExportFinancialsJsonResponse", "Data"]
 
 class Data(BaseModel):
     edinet_code: str
+    """EDINET submitter code."""
 
     fiscal_year: int
+    """Fiscal year."""
 
     name_jp: str
+    """Company name in Japanese."""
 
     accounting_standard: Optional[str] = None
+    """Accounting standard: 'Japan GAAP', 'IFRS', or 'US GAAP'."""
 
     name_en: Optional[str] = None
+    """Company name in English."""
 
     period_end: Optional[str] = None
+    """Last day of the fiscal period (ISO 8601)."""
 
     sector: Optional[str] = None
+    """TSE 33-sector classification in Japanese."""
 
     securities_code: Optional[str] = None
+    """TSE securities code."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -42,5 +50,7 @@ class Data(BaseModel):
 
 class BulkExportFinancialsJsonResponse(BaseModel):
     data: List[Data]
+    """Array of result objects."""
 
     meta: Meta
+    """Pagination and request metadata."""

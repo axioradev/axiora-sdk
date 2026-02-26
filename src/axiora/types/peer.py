@@ -10,9 +10,13 @@ __all__ = ["Peer"]
 
 class Peer(BaseModel):
     company: Company
+    """Peer company details."""
 
     fiscal_year: int
+    """Fiscal year of the peer data."""
 
     net_income: Optional[int] = None
+    """Net income in JPY."""
 
     revenue: Optional[int] = None
+    """Revenue in JPY."""
