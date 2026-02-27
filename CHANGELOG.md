@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2026-02-27)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/axioradev/axiora-sdk/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* **ci:** bump uv version ([cb1c955](https://github.com/axioradev/axiora-sdk/commit/cb1c955033e49f690dc017c5363417608f342975))
+
 ## 0.4.0 (2026-02-26)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/axioradev/axiora-sdk/compare/v0.3.0...v0.4.0)
