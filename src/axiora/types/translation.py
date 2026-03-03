@@ -9,23 +9,23 @@ __all__ = ["Translation"]
 
 
 class Translation(BaseModel):
-    model: str
-    """LLM model used for translation (e.g. 'gemini/gemini-2.0-flash')."""
-
     section: str
     """
     Filing section translated: 'mda', 'risk_factors', 'business_overview',
     'governance', 'financial_notes', or 'accounting_policy'.
     """
 
-    text_en: str
-    """English translation of the section."""
-
     translated_at: datetime
     """When the translation was generated."""
 
+    model: Optional[str] = None
+    """LLM model used for translation (e.g. 'gemini/gemini-2.0-flash')."""
+
     source_jp: Optional[str] = None
     """Original Japanese text. Null if source was not stored."""
+
+    text_en: Optional[str] = None
+    """English translation of the section. Null if not yet translated."""
 
     token_count: Optional[int] = None
     """Approximate token count of the translated output."""
