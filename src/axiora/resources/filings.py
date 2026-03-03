@@ -7,7 +7,12 @@ from datetime import date, datetime
 
 import httpx
 
-from ..types import filing_list_params, filing_calendar_params, filing_retrieve_translations_params
+from ..types import (
+    filing_list_params,
+    filing_calendar_params,
+    filing_retrieve_sections_params,
+    filing_retrieve_translations_params,
+)
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -22,6 +27,7 @@ from .._base_client import make_request_options
 from ..types.filing_list_response import FilingListResponse
 from ..types.filing_calendar_response import FilingCalendarResponse
 from ..types.filing_retrieve_response import FilingRetrieveResponse
+from ..types.filing_retrieve_sections_response import FilingRetrieveSectionsResponse
 from ..types.filing_retrieve_translations_response import FilingRetrieveTranslationsResponse
 
 __all__ = ["FilingsResource", "AsyncFilingsResource"]
@@ -189,6 +195,54 @@ class FilingsResource(SyncAPIResource):
                 query=maybe_transform({"month": month}, filing_calendar_params.FilingCalendarParams),
             ),
             cast_to=FilingCalendarResponse,
+        )
+
+    def retrieve_sections(
+        self,
+        doc_id: str,
+        *,
+        section: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> FilingRetrieveSectionsResponse:
+        """
+        Get text sections from a specific filing.
+
+        Returns the full Japanese text of each section, with English translations where
+        available. No truncation.
+
+        Args:
+          section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
+              sustainability, research_and_development, dividend_policy, governance,
+              company_history, employees, critical_contracts, capital_expenditures,
+              accounting_policy, segment_info, financial_instruments.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not doc_id:
+            raise ValueError(f"Expected a non-empty value for `doc_id` but received {doc_id!r}")
+        return self._get(
+            f"/v1/filings/{doc_id}/sections",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"section": section}, filing_retrieve_sections_params.FilingRetrieveSectionsParams
+                ),
+            ),
+            cast_to=FilingRetrieveSectionsResponse,
         )
 
     def retrieve_translations(
@@ -398,6 +452,54 @@ class AsyncFilingsResource(AsyncAPIResource):
             cast_to=FilingCalendarResponse,
         )
 
+    async def retrieve_sections(
+        self,
+        doc_id: str,
+        *,
+        section: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> FilingRetrieveSectionsResponse:
+        """
+        Get text sections from a specific filing.
+
+        Returns the full Japanese text of each section, with English translations where
+        available. No truncation.
+
+        Args:
+          section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
+              sustainability, research_and_development, dividend_policy, governance,
+              company_history, employees, critical_contracts, capital_expenditures,
+              accounting_policy, segment_info, financial_instruments.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not doc_id:
+            raise ValueError(f"Expected a non-empty value for `doc_id` but received {doc_id!r}")
+        return await self._get(
+            f"/v1/filings/{doc_id}/sections",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"section": section}, filing_retrieve_sections_params.FilingRetrieveSectionsParams
+                ),
+            ),
+            cast_to=FilingRetrieveSectionsResponse,
+        )
+
     async def retrieve_translations(
         self,
         doc_id: str,
@@ -454,6 +556,9 @@ class FilingsResourceWithRawResponse:
         self.calendar = to_raw_response_wrapper(
             filings.calendar,
         )
+        self.retrieve_sections = to_raw_response_wrapper(
+            filings.retrieve_sections,
+        )
         self.retrieve_translations = to_raw_response_wrapper(
             filings.retrieve_translations,
         )
@@ -471,6 +576,9 @@ class AsyncFilingsResourceWithRawResponse:
         )
         self.calendar = async_to_raw_response_wrapper(
             filings.calendar,
+        )
+        self.retrieve_sections = async_to_raw_response_wrapper(
+            filings.retrieve_sections,
         )
         self.retrieve_translations = async_to_raw_response_wrapper(
             filings.retrieve_translations,
@@ -490,6 +598,9 @@ class FilingsResourceWithStreamingResponse:
         self.calendar = to_streamed_response_wrapper(
             filings.calendar,
         )
+        self.retrieve_sections = to_streamed_response_wrapper(
+            filings.retrieve_sections,
+        )
         self.retrieve_translations = to_streamed_response_wrapper(
             filings.retrieve_translations,
         )
@@ -507,6 +618,9 @@ class AsyncFilingsResourceWithStreamingResponse:
         )
         self.calendar = async_to_streamed_response_wrapper(
             filings.calendar,
+        )
+        self.retrieve_sections = async_to_streamed_response_wrapper(
+            filings.retrieve_sections,
         )
         self.retrieve_translations = async_to_streamed_response_wrapper(
             filings.retrieve_translations,

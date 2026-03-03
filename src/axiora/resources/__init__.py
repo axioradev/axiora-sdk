@@ -16,6 +16,14 @@ from .keys import (
     KeysResourceWithStreamingResponse,
     AsyncKeysResourceWithStreamingResponse,
 )
+from .batch import (
+    BatchResource,
+    AsyncBatchResource,
+    BatchResourceWithRawResponse,
+    AsyncBatchResourceWithRawResponse,
+    BatchResourceWithStreamingResponse,
+    AsyncBatchResourceWithStreamingResponse,
+)
 from .usage import (
     UsageResource,
     AsyncUsageResource,
@@ -79,6 +87,22 @@ from .rankings import (
     AsyncRankingsResourceWithRawResponse,
     RankingsResourceWithStreamingResponse,
     AsyncRankingsResourceWithStreamingResponse,
+)
+from .sections import (
+    SectionsResource,
+    AsyncSectionsResource,
+    SectionsResourceWithRawResponse,
+    AsyncSectionsResourceWithRawResponse,
+    SectionsResourceWithStreamingResponse,
+    AsyncSectionsResourceWithStreamingResponse,
+)
+from .waitlist import (
+    WaitlistResource,
+    AsyncWaitlistResource,
+    WaitlistResourceWithRawResponse,
+    AsyncWaitlistResourceWithRawResponse,
+    WaitlistResourceWithStreamingResponse,
+    AsyncWaitlistResourceWithStreamingResponse,
 )
 from .webhooks import (
     WebhooksResource,
@@ -212,4 +236,22 @@ __all__ = [
     "AsyncCoverageResourceWithRawResponse",
     "CoverageResourceWithStreamingResponse",
     "AsyncCoverageResourceWithStreamingResponse",
+    "BatchResource",
+    "AsyncBatchResource",
+    "BatchResourceWithRawResponse",
+    "AsyncBatchResourceWithRawResponse",
+    "BatchResourceWithStreamingResponse",
+    "AsyncBatchResourceWithStreamingResponse",
+    "WaitlistResource",
+    "AsyncWaitlistResource",
+    "WaitlistResourceWithRawResponse",
+    "AsyncWaitlistResourceWithRawResponse",
+    "WaitlistResourceWithStreamingResponse",
+    "AsyncWaitlistResourceWithStreamingResponse",
+    "SectionsResource",
+    "AsyncSectionsResource",
+    "SectionsResourceWithRawResponse",
+    "AsyncSectionsResourceWithRawResponse",
+    "SectionsResourceWithStreamingResponse",
+    "AsyncSectionsResourceWithStreamingResponse",
 ]
