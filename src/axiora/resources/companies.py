@@ -14,6 +14,7 @@ from ..types import (
     company_retrieve_peers_params,
     company_retrieve_growth_params,
     company_retrieve_ratios_params,
+    company_retrieve_sections_params,
     company_retrieve_financials_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -33,7 +34,9 @@ from ..types.company_retrieve_peers_response import CompanyRetrievePeersResponse
 from ..types.company_retrieve_growth_response import CompanyRetrieveGrowthResponse
 from ..types.company_retrieve_health_response import CompanyRetrieveHealthResponse
 from ..types.company_retrieve_ratios_response import CompanyRetrieveRatiosResponse
+from ..types.company_retrieve_sections_response import CompanyRetrieveSectionsResponse
 from ..types.company_retrieve_financials_response import CompanyRetrieveFinancialsResponse
+from ..types.company_retrieve_identifiers_response import CompanyRetrieveIdentifiersResponse
 
 __all__ = ["CompaniesResource", "AsyncCompaniesResource"]
 
@@ -298,6 +301,40 @@ class CompaniesResource(SyncAPIResource):
             cast_to=CompanyRetrieveHealthResponse,
         )
 
+    def retrieve_identifiers(
+        self,
+        code: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyRetrieveIdentifiersResponse:
+        """
+        Get cross-reference identifiers (ISIN, LEI, Bloomberg ticker, etc.) for a
+        company.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return self._get(
+            f"/v1/companies/{code}/identifiers",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CompanyRetrieveIdentifiersResponse,
+        )
+
     def retrieve_peers(
         self,
         code: str,
@@ -375,6 +412,61 @@ class CompaniesResource(SyncAPIResource):
                 query=maybe_transform({"years": years}, company_retrieve_ratios_params.CompanyRetrieveRatiosParams),
             ),
             cast_to=CompanyRetrieveRatiosResponse,
+        )
+
+    def retrieve_sections(
+        self,
+        code: str,
+        *,
+        fiscal_year: Optional[int] | Omit = omit,
+        section: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyRetrieveSectionsResponse:
+        """
+        Get text sections from a company's annual filing.
+
+        Returns the full Japanese text of each section, with English translations where
+        available. No truncation.
+
+        Args:
+          fiscal_year: Fiscal year. Defaults to latest.
+
+          section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
+              sustainability, research_and_development, dividend_policy, governance,
+              company_history, employees, critical_contracts, capital_expenditures,
+              accounting_policy, segment_info, financial_instruments.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return self._get(
+            f"/v1/companies/{code}/sections",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "fiscal_year": fiscal_year,
+                        "section": section,
+                    },
+                    company_retrieve_sections_params.CompanyRetrieveSectionsParams,
+                ),
+            ),
+            cast_to=CompanyRetrieveSectionsResponse,
         )
 
     def search(
@@ -687,6 +779,40 @@ class AsyncCompaniesResource(AsyncAPIResource):
             cast_to=CompanyRetrieveHealthResponse,
         )
 
+    async def retrieve_identifiers(
+        self,
+        code: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyRetrieveIdentifiersResponse:
+        """
+        Get cross-reference identifiers (ISIN, LEI, Bloomberg ticker, etc.) for a
+        company.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return await self._get(
+            f"/v1/companies/{code}/identifiers",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CompanyRetrieveIdentifiersResponse,
+        )
+
     async def retrieve_peers(
         self,
         code: str,
@@ -770,6 +896,61 @@ class AsyncCompaniesResource(AsyncAPIResource):
             cast_to=CompanyRetrieveRatiosResponse,
         )
 
+    async def retrieve_sections(
+        self,
+        code: str,
+        *,
+        fiscal_year: Optional[int] | Omit = omit,
+        section: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyRetrieveSectionsResponse:
+        """
+        Get text sections from a company's annual filing.
+
+        Returns the full Japanese text of each section, with English translations where
+        available. No truncation.
+
+        Args:
+          fiscal_year: Fiscal year. Defaults to latest.
+
+          section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
+              sustainability, research_and_development, dividend_policy, governance,
+              company_history, employees, critical_contracts, capital_expenditures,
+              accounting_policy, segment_info, financial_instruments.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return await self._get(
+            f"/v1/companies/{code}/sections",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "fiscal_year": fiscal_year,
+                        "section": section,
+                    },
+                    company_retrieve_sections_params.CompanyRetrieveSectionsParams,
+                ),
+            ),
+            cast_to=CompanyRetrieveSectionsResponse,
+        )
+
     async def search(
         self,
         *,
@@ -837,11 +1018,17 @@ class CompaniesResourceWithRawResponse:
         self.retrieve_health = to_raw_response_wrapper(
             companies.retrieve_health,
         )
+        self.retrieve_identifiers = to_raw_response_wrapper(
+            companies.retrieve_identifiers,
+        )
         self.retrieve_peers = to_raw_response_wrapper(
             companies.retrieve_peers,
         )
         self.retrieve_ratios = to_raw_response_wrapper(
             companies.retrieve_ratios,
+        )
+        self.retrieve_sections = to_raw_response_wrapper(
+            companies.retrieve_sections,
         )
         self.search = to_raw_response_wrapper(
             companies.search,
@@ -867,11 +1054,17 @@ class AsyncCompaniesResourceWithRawResponse:
         self.retrieve_health = async_to_raw_response_wrapper(
             companies.retrieve_health,
         )
+        self.retrieve_identifiers = async_to_raw_response_wrapper(
+            companies.retrieve_identifiers,
+        )
         self.retrieve_peers = async_to_raw_response_wrapper(
             companies.retrieve_peers,
         )
         self.retrieve_ratios = async_to_raw_response_wrapper(
             companies.retrieve_ratios,
+        )
+        self.retrieve_sections = async_to_raw_response_wrapper(
+            companies.retrieve_sections,
         )
         self.search = async_to_raw_response_wrapper(
             companies.search,
@@ -897,11 +1090,17 @@ class CompaniesResourceWithStreamingResponse:
         self.retrieve_health = to_streamed_response_wrapper(
             companies.retrieve_health,
         )
+        self.retrieve_identifiers = to_streamed_response_wrapper(
+            companies.retrieve_identifiers,
+        )
         self.retrieve_peers = to_streamed_response_wrapper(
             companies.retrieve_peers,
         )
         self.retrieve_ratios = to_streamed_response_wrapper(
             companies.retrieve_ratios,
+        )
+        self.retrieve_sections = to_streamed_response_wrapper(
+            companies.retrieve_sections,
         )
         self.search = to_streamed_response_wrapper(
             companies.search,
@@ -927,11 +1126,17 @@ class AsyncCompaniesResourceWithStreamingResponse:
         self.retrieve_health = async_to_streamed_response_wrapper(
             companies.retrieve_health,
         )
+        self.retrieve_identifiers = async_to_streamed_response_wrapper(
+            companies.retrieve_identifiers,
+        )
         self.retrieve_peers = async_to_streamed_response_wrapper(
             companies.retrieve_peers,
         )
         self.retrieve_ratios = async_to_streamed_response_wrapper(
             companies.retrieve_ratios,
+        )
+        self.retrieve_sections = async_to_streamed_response_wrapper(
+            companies.retrieve_sections,
         )
         self.search = async_to_streamed_response_wrapper(
             companies.search,

@@ -41,8 +41,10 @@ from axiora.types import (
     CompanyRetrieveFinancialsResponse,
     CompanyRetrieveGrowthResponse,
     CompanyRetrieveHealthResponse,
+    CompanyRetrieveIdentifiersResponse,
     CompanyRetrievePeersResponse,
     CompanyRetrieveRatiosResponse,
+    CompanyRetrieveSectionsResponse,
 )
 ```
 
@@ -53,8 +55,10 @@ Methods:
 - <code title="get /v1/companies/{code}/financials">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_financials</a>(code, \*\*<a href="src/axiora/types/company_retrieve_financials_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_financials_response.py">CompanyRetrieveFinancialsResponse</a></code>
 - <code title="get /v1/companies/{code}/growth">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_growth</a>(code, \*\*<a href="src/axiora/types/company_retrieve_growth_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_growth_response.py">CompanyRetrieveGrowthResponse</a></code>
 - <code title="get /v1/companies/{code}/health">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_health</a>(code) -> <a href="./src/axiora/types/company_retrieve_health_response.py">CompanyRetrieveHealthResponse</a></code>
+- <code title="get /v1/companies/{code}/identifiers">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_identifiers</a>(code) -> <a href="./src/axiora/types/company_retrieve_identifiers_response.py">CompanyRetrieveIdentifiersResponse</a></code>
 - <code title="get /v1/companies/{code}/peers">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_peers</a>(code, \*\*<a href="src/axiora/types/company_retrieve_peers_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_peers_response.py">CompanyRetrievePeersResponse</a></code>
 - <code title="get /v1/companies/{code}/ratios">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_ratios</a>(code, \*\*<a href="src/axiora/types/company_retrieve_ratios_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_ratios_response.py">CompanyRetrieveRatiosResponse</a></code>
+- <code title="get /v1/companies/{code}/sections">client.companies.<a href="./src/axiora/resources/companies.py">retrieve_sections</a>(code, \*\*<a href="src/axiora/types/company_retrieve_sections_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_sections_response.py">CompanyRetrieveSectionsResponse</a></code>
 - <code title="get /v1/companies/search">client.companies.<a href="./src/axiora/resources/companies.py">search</a>(\*\*<a href="src/axiora/types/company_search_params.py">params</a>) -> <a href="./src/axiora/types/list_response.py">ListResponse</a></code>
 
 # Filings
@@ -68,6 +72,7 @@ from axiora.types import (
     FilingRetrieveResponse,
     FilingListResponse,
     FilingCalendarResponse,
+    FilingRetrieveSectionsResponse,
     FilingRetrieveTranslationsResponse,
 )
 ```
@@ -77,6 +82,7 @@ Methods:
 - <code title="get /v1/filings/{doc_id}">client.filings.<a href="./src/axiora/resources/filings.py">retrieve</a>(doc_id) -> <a href="./src/axiora/types/filing_retrieve_response.py">FilingRetrieveResponse</a></code>
 - <code title="get /v1/filings">client.filings.<a href="./src/axiora/resources/filings.py">list</a>(\*\*<a href="src/axiora/types/filing_list_params.py">params</a>) -> <a href="./src/axiora/types/filing_list_response.py">FilingListResponse</a></code>
 - <code title="get /v1/filings/calendar">client.filings.<a href="./src/axiora/resources/filings.py">calendar</a>(\*\*<a href="src/axiora/types/filing_calendar_params.py">params</a>) -> <a href="./src/axiora/types/filing_calendar_response.py">FilingCalendarResponse</a></code>
+- <code title="get /v1/filings/{doc_id}/sections">client.filings.<a href="./src/axiora/resources/filings.py">retrieve_sections</a>(doc_id, \*\*<a href="src/axiora/types/filing_retrieve_sections_params.py">params</a>) -> <a href="./src/axiora/types/filing_retrieve_sections_response.py">FilingRetrieveSectionsResponse</a></code>
 - <code title="get /v1/filings/{doc_id}/translations">client.filings.<a href="./src/axiora/resources/filings.py">retrieve_translations</a>(doc_id, \*\*<a href="src/axiora/types/filing_retrieve_translations_params.py">params</a>) -> <a href="./src/axiora/types/filing_retrieve_translations_response.py">FilingRetrieveTranslationsResponse</a></code>
 
 # Translations
@@ -216,3 +222,33 @@ from axiora.types import CoverageRetrieveResponse
 Methods:
 
 - <code title="get /v1/coverage">client.coverage.<a href="./src/axiora/resources/coverage.py">retrieve</a>() -> <a href="./src/axiora/types/coverage_retrieve_response.py">CoverageRetrieveResponse</a></code>
+
+# Batch
+
+Types:
+
+```python
+from axiora.types import BatchFetchFinancialsResponse
+```
+
+Methods:
+
+- <code title="post /v1/batch/financials">client.batch.<a href="./src/axiora/resources/batch.py">fetch_financials</a>(\*\*<a href="src/axiora/types/batch_fetch_financials_params.py">params</a>) -> <a href="./src/axiora/types/batch_fetch_financials_response.py">BatchFetchFinancialsResponse</a></code>
+
+# Waitlist
+
+Methods:
+
+- <code title="post /v1/waitlist">client.waitlist.<a href="./src/axiora/resources/waitlist.py">join</a>(\*\*<a href="src/axiora/types/waitlist_join_params.py">params</a>) -> object</code>
+
+# Sections
+
+Types:
+
+```python
+from axiora.types import SectionListAvailableResponse
+```
+
+Methods:
+
+- <code title="get /v1/sections/available">client.sections.<a href="./src/axiora/resources/sections.py">list_available</a>() -> <a href="./src/axiora/types/section_list_available_response.py">SectionListAvailableResponse</a></code>
