@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0 (2026-03-03)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/axioradev/axiora-sdk/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** add sections api endpoints ([5b92006](https://github.com/axioradev/axiora-sdk/commit/5b92006a558abedb9c355ffa6b3118dcfe5753e7))
+* **api:** section endpoints ([9cc9e74](https://github.com/axioradev/axiora-sdk/commit/9cc9e7429f22203f0dc4b949167037b7e81b37d2))
+
+
+### Chores
+
+* **ci:** bump uv version ([cb1c955](https://github.com/axioradev/axiora-sdk/commit/cb1c955033e49f690dc017c5363417608f342975))
+
 ## 0.4.0 (2026-02-26)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/axioradev/axiora-sdk/compare/v0.3.0...v0.4.0)

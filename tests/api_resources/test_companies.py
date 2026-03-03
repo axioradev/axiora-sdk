@@ -16,7 +16,9 @@ from axiora.types import (
     CompanyRetrieveGrowthResponse,
     CompanyRetrieveHealthResponse,
     CompanyRetrieveRatiosResponse,
+    CompanyRetrieveSectionsResponse,
     CompanyRetrieveFinancialsResponse,
+    CompanyRetrieveIdentifiersResponse,
 )
 from axiora._utils import parse_datetime
 
@@ -134,6 +136,7 @@ class TestCompanies:
     def test_method_retrieve_financials_with_all_params(self, client: Axiora) -> None:
         company = client.companies.retrieve_financials(
             code="code",
+            doc_type="doc_type",
             fields="fields",
             years=1,
         )
@@ -268,6 +271,48 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_retrieve_identifiers(self, client: Axiora) -> None:
+        company = client.companies.retrieve_identifiers(
+            "code",
+        )
+        assert_matches_type(CompanyRetrieveIdentifiersResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_identifiers(self, client: Axiora) -> None:
+        response = client.companies.with_raw_response.retrieve_identifiers(
+            "code",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        company = response.parse()
+        assert_matches_type(CompanyRetrieveIdentifiersResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_identifiers(self, client: Axiora) -> None:
+        with client.companies.with_streaming_response.retrieve_identifiers(
+            "code",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            company = response.parse()
+            assert_matches_type(CompanyRetrieveIdentifiersResponse, company, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_retrieve_identifiers(self, client: Axiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
+            client.companies.with_raw_response.retrieve_identifiers(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_retrieve_peers(self, client: Axiora) -> None:
         company = client.companies.retrieve_peers(
             code="code",
@@ -365,6 +410,58 @@ class TestCompanies:
     def test_path_params_retrieve_ratios(self, client: Axiora) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
             client.companies.with_raw_response.retrieve_ratios(
+                code="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve_sections(self, client: Axiora) -> None:
+        company = client.companies.retrieve_sections(
+            code="code",
+        )
+        assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve_sections_with_all_params(self, client: Axiora) -> None:
+        company = client.companies.retrieve_sections(
+            code="code",
+            fiscal_year=2000,
+            section="section",
+        )
+        assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_sections(self, client: Axiora) -> None:
+        response = client.companies.with_raw_response.retrieve_sections(
+            code="code",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        company = response.parse()
+        assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_sections(self, client: Axiora) -> None:
+        with client.companies.with_streaming_response.retrieve_sections(
+            code="code",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            company = response.parse()
+            assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_retrieve_sections(self, client: Axiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
+            client.companies.with_raw_response.retrieve_sections(
                 code="",
             )
 
@@ -525,6 +622,7 @@ class TestAsyncCompanies:
     async def test_method_retrieve_financials_with_all_params(self, async_client: AsyncAxiora) -> None:
         company = await async_client.companies.retrieve_financials(
             code="code",
+            doc_type="doc_type",
             fields="fields",
             years=1,
         )
@@ -659,6 +757,48 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_retrieve_identifiers(self, async_client: AsyncAxiora) -> None:
+        company = await async_client.companies.retrieve_identifiers(
+            "code",
+        )
+        assert_matches_type(CompanyRetrieveIdentifiersResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_identifiers(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.companies.with_raw_response.retrieve_identifiers(
+            "code",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        company = await response.parse()
+        assert_matches_type(CompanyRetrieveIdentifiersResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_identifiers(self, async_client: AsyncAxiora) -> None:
+        async with async_client.companies.with_streaming_response.retrieve_identifiers(
+            "code",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            company = await response.parse()
+            assert_matches_type(CompanyRetrieveIdentifiersResponse, company, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve_identifiers(self, async_client: AsyncAxiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
+            await async_client.companies.with_raw_response.retrieve_identifiers(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_retrieve_peers(self, async_client: AsyncAxiora) -> None:
         company = await async_client.companies.retrieve_peers(
             code="code",
@@ -756,6 +896,58 @@ class TestAsyncCompanies:
     async def test_path_params_retrieve_ratios(self, async_client: AsyncAxiora) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
             await async_client.companies.with_raw_response.retrieve_ratios(
+                code="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_sections(self, async_client: AsyncAxiora) -> None:
+        company = await async_client.companies.retrieve_sections(
+            code="code",
+        )
+        assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_sections_with_all_params(self, async_client: AsyncAxiora) -> None:
+        company = await async_client.companies.retrieve_sections(
+            code="code",
+            fiscal_year=2000,
+            section="section",
+        )
+        assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_sections(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.companies.with_raw_response.retrieve_sections(
+            code="code",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        company = await response.parse()
+        assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_sections(self, async_client: AsyncAxiora) -> None:
+        async with async_client.companies.with_streaming_response.retrieve_sections(
+            code="code",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            company = await response.parse()
+            assert_matches_type(CompanyRetrieveSectionsResponse, company, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve_sections(self, async_client: AsyncAxiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
+            await async_client.companies.with_raw_response.retrieve_sections(
                 code="",
             )
 

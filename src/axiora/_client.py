@@ -35,6 +35,7 @@ if TYPE_CHECKING:
     from .resources import (
         bulk,
         keys,
+        batch,
         usage,
         health,
         screen,
@@ -43,6 +44,8 @@ if TYPE_CHECKING:
         sectors,
         coverage,
         rankings,
+        sections,
+        waitlist,
         webhooks,
         companies,
         freshness,
@@ -51,6 +54,7 @@ if TYPE_CHECKING:
     )
     from .resources.bulk import BulkResource, AsyncBulkResource
     from .resources.keys import KeysResource, AsyncKeysResource
+    from .resources.batch import BatchResource, AsyncBatchResource
     from .resources.usage import UsageResource, AsyncUsageResource
     from .resources.health import HealthResource, AsyncHealthResource
     from .resources.screen import ScreenResource, AsyncScreenResource
@@ -59,6 +63,8 @@ if TYPE_CHECKING:
     from .resources.sectors import SectorsResource, AsyncSectorsResource
     from .resources.coverage import CoverageResource, AsyncCoverageResource
     from .resources.rankings import RankingsResource, AsyncRankingsResource
+    from .resources.sections import SectionsResource, AsyncSectionsResource
+    from .resources.waitlist import WaitlistResource, AsyncWaitlistResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.companies import CompaniesResource, AsyncCompaniesResource
     from .resources.freshness import FreshnessResource, AsyncFreshnessResource
@@ -208,6 +214,24 @@ class Axiora(SyncAPIClient):
         from .resources.coverage import CoverageResource
 
         return CoverageResource(self)
+
+    @cached_property
+    def batch(self) -> BatchResource:
+        from .resources.batch import BatchResource
+
+        return BatchResource(self)
+
+    @cached_property
+    def waitlist(self) -> WaitlistResource:
+        from .resources.waitlist import WaitlistResource
+
+        return WaitlistResource(self)
+
+    @cached_property
+    def sections(self) -> SectionsResource:
+        from .resources.sections import SectionsResource
+
+        return SectionsResource(self)
 
     @cached_property
     def with_raw_response(self) -> AxioraWithRawResponse:
@@ -475,6 +499,24 @@ class AsyncAxiora(AsyncAPIClient):
         return AsyncCoverageResource(self)
 
     @cached_property
+    def batch(self) -> AsyncBatchResource:
+        from .resources.batch import AsyncBatchResource
+
+        return AsyncBatchResource(self)
+
+    @cached_property
+    def waitlist(self) -> AsyncWaitlistResource:
+        from .resources.waitlist import AsyncWaitlistResource
+
+        return AsyncWaitlistResource(self)
+
+    @cached_property
+    def sections(self) -> AsyncSectionsResource:
+        from .resources.sections import AsyncSectionsResource
+
+        return AsyncSectionsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncAxioraWithRawResponse:
         return AsyncAxioraWithRawResponse(self)
 
@@ -694,6 +736,24 @@ class AxioraWithRawResponse:
 
         return CoverageResourceWithRawResponse(self._client.coverage)
 
+    @cached_property
+    def batch(self) -> batch.BatchResourceWithRawResponse:
+        from .resources.batch import BatchResourceWithRawResponse
+
+        return BatchResourceWithRawResponse(self._client.batch)
+
+    @cached_property
+    def waitlist(self) -> waitlist.WaitlistResourceWithRawResponse:
+        from .resources.waitlist import WaitlistResourceWithRawResponse
+
+        return WaitlistResourceWithRawResponse(self._client.waitlist)
+
+    @cached_property
+    def sections(self) -> sections.SectionsResourceWithRawResponse:
+        from .resources.sections import SectionsResourceWithRawResponse
+
+        return SectionsResourceWithRawResponse(self._client.sections)
+
 
 class AsyncAxioraWithRawResponse:
     _client: AsyncAxiora
@@ -790,6 +850,24 @@ class AsyncAxioraWithRawResponse:
         from .resources.coverage import AsyncCoverageResourceWithRawResponse
 
         return AsyncCoverageResourceWithRawResponse(self._client.coverage)
+
+    @cached_property
+    def batch(self) -> batch.AsyncBatchResourceWithRawResponse:
+        from .resources.batch import AsyncBatchResourceWithRawResponse
+
+        return AsyncBatchResourceWithRawResponse(self._client.batch)
+
+    @cached_property
+    def waitlist(self) -> waitlist.AsyncWaitlistResourceWithRawResponse:
+        from .resources.waitlist import AsyncWaitlistResourceWithRawResponse
+
+        return AsyncWaitlistResourceWithRawResponse(self._client.waitlist)
+
+    @cached_property
+    def sections(self) -> sections.AsyncSectionsResourceWithRawResponse:
+        from .resources.sections import AsyncSectionsResourceWithRawResponse
+
+        return AsyncSectionsResourceWithRawResponse(self._client.sections)
 
 
 class AxioraWithStreamedResponse:
@@ -888,6 +966,24 @@ class AxioraWithStreamedResponse:
 
         return CoverageResourceWithStreamingResponse(self._client.coverage)
 
+    @cached_property
+    def batch(self) -> batch.BatchResourceWithStreamingResponse:
+        from .resources.batch import BatchResourceWithStreamingResponse
+
+        return BatchResourceWithStreamingResponse(self._client.batch)
+
+    @cached_property
+    def waitlist(self) -> waitlist.WaitlistResourceWithStreamingResponse:
+        from .resources.waitlist import WaitlistResourceWithStreamingResponse
+
+        return WaitlistResourceWithStreamingResponse(self._client.waitlist)
+
+    @cached_property
+    def sections(self) -> sections.SectionsResourceWithStreamingResponse:
+        from .resources.sections import SectionsResourceWithStreamingResponse
+
+        return SectionsResourceWithStreamingResponse(self._client.sections)
+
 
 class AsyncAxioraWithStreamedResponse:
     _client: AsyncAxiora
@@ -984,6 +1080,24 @@ class AsyncAxioraWithStreamedResponse:
         from .resources.coverage import AsyncCoverageResourceWithStreamingResponse
 
         return AsyncCoverageResourceWithStreamingResponse(self._client.coverage)
+
+    @cached_property
+    def batch(self) -> batch.AsyncBatchResourceWithStreamingResponse:
+        from .resources.batch import AsyncBatchResourceWithStreamingResponse
+
+        return AsyncBatchResourceWithStreamingResponse(self._client.batch)
+
+    @cached_property
+    def waitlist(self) -> waitlist.AsyncWaitlistResourceWithStreamingResponse:
+        from .resources.waitlist import AsyncWaitlistResourceWithStreamingResponse
+
+        return AsyncWaitlistResourceWithStreamingResponse(self._client.waitlist)
+
+    @cached_property
+    def sections(self) -> sections.AsyncSectionsResourceWithStreamingResponse:
+        from .resources.sections import AsyncSectionsResourceWithStreamingResponse
+
+        return AsyncSectionsResourceWithStreamingResponse(self._client.sections)
 
 
 Client = Axiora
