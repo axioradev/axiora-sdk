@@ -175,6 +175,7 @@ class CompaniesResource(SyncAPIResource):
         self,
         code: str,
         *,
+        doc_type: str | Omit = omit,
         fields: Optional[str] | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -188,6 +189,8 @@ class CompaniesResource(SyncAPIResource):
         Get Financials
 
         Args:
+          doc_type: Filing type: 120 (annual), 130 (semi-annual), 140 (quarterly)
+
           fields: Comma-separated field names
 
           years: Number of fiscal years
@@ -211,6 +214,7 @@ class CompaniesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "doc_type": doc_type,
                         "fields": fields,
                         "years": years,
                     },
@@ -558,6 +562,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         self,
         code: str,
         *,
+        doc_type: str | Omit = omit,
         fields: Optional[str] | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -571,6 +576,8 @@ class AsyncCompaniesResource(AsyncAPIResource):
         Get Financials
 
         Args:
+          doc_type: Filing type: 120 (annual), 130 (semi-annual), 140 (quarterly)
+
           fields: Comma-separated field names
 
           years: Number of fiscal years
@@ -594,6 +601,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "doc_type": doc_type,
                         "fields": fields,
                         "years": years,
                     },

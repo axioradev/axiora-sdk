@@ -134,6 +134,7 @@ class TestCompanies:
     def test_method_retrieve_financials_with_all_params(self, client: Axiora) -> None:
         company = client.companies.retrieve_financials(
             code="code",
+            doc_type="doc_type",
             fields="fields",
             years=1,
         )
@@ -525,6 +526,7 @@ class TestAsyncCompanies:
     async def test_method_retrieve_financials_with_all_params(self, async_client: AsyncAxiora) -> None:
         company = await async_client.companies.retrieve_financials(
             code="code",
+            doc_type="doc_type",
             fields="fields",
             years=1,
         )

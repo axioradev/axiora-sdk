@@ -9,6 +9,9 @@ __all__ = ["CompanyRetrieveFinancialsParams"]
 
 
 class CompanyRetrieveFinancialsParams(TypedDict, total=False):
+    doc_type: str
+    """Filing type: 120 (annual), 130 (semi-annual), 140 (quarterly)"""
+
     fields: Optional[str]
     """Comma-separated field names"""
 
