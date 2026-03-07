@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.1 (2026-03-07)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/axioradev/axiora-sdk/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([cd61b0e](https://github.com/axioradev/axiora-sdk/commit/cd61b0e5d792c140aeaea78d09c66ceb8926c3a3))
+* **internal:** refactor authentication internals ([e2069e2](https://github.com/axioradev/axiora-sdk/commit/e2069e263b8fb9b738dcfda660c4e292fc8f79aa))
+
 ## 0.5.0 (2026-03-03)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/axioradev/axiora-sdk/compare/v0.4.0...v0.5.0)
