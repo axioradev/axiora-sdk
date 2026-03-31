@@ -18,5 +18,5 @@ class CompanyRetrieveSectionsParams(TypedDict, total=False):
     One of: mda, risk_factors, business_overview, strategy, sustainability,
     research_and_development, dividend_policy, governance, company_history,
     employees, critical_contracts, capital_expenditures, accounting_policy,
-    segment_info, financial_instruments.
+    segment_info, financial_instruments, officers, outside_directors, remuneration.
     """

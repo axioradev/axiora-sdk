@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 (2026-03-31)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/axioradev/axiora-sdk/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** manual updates ([12b1545](https://github.com/axioradev/axiora-sdk/commit/12b1545475416bff5375163ff683e97a58b489c4))
+
 ## 0.6.0 (2026-03-27)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/axioradev/axiora-sdk/compare/v0.5.0...v0.6.0)

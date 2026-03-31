@@ -47,6 +47,10 @@ class WaitlistResource(SyncAPIResource):
         *,
         tier: str,
         email: Optional[str] | Omit = omit,
+        firm: Optional[str] | Omit = omit,
+        message: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        source: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,6 +76,10 @@ class WaitlistResource(SyncAPIResource):
                 {
                     "tier": tier,
                     "email": email,
+                    "firm": firm,
+                    "message": message,
+                    "name": name,
+                    "source": source,
                 },
                 waitlist_join_params.WaitlistJoinParams,
             ),
@@ -107,6 +115,10 @@ class AsyncWaitlistResource(AsyncAPIResource):
         *,
         tier: str,
         email: Optional[str] | Omit = omit,
+        firm: Optional[str] | Omit = omit,
+        message: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        source: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -132,6 +144,10 @@ class AsyncWaitlistResource(AsyncAPIResource):
                 {
                     "tier": tier,
                     "email": email,
+                    "firm": firm,
+                    "message": message,
+                    "name": name,
+                    "source": source,
                 },
                 waitlist_join_params.WaitlistJoinParams,
             ),

@@ -16,15 +16,12 @@ class Filing(BaseModel):
     """When this record was created in Axiora."""
 
     doc_id: str
-    """EDINET document ID (e.g.
-
-    'S100ABCD'). Globally unique identifier for each filing.
-    """
+    """EDINET document ID (e.g. 'S100ABCD'). Globally unique."""
 
     doc_type: str
-    """EDINET document type code.
+    """EDINET doc type code.
 
-    '120'=annual, '130'=semi-annual, '140'=quarterly, '150'=extraordinary.
+    120=annual, 130=semi-annual, 140=quarterly, 150=extraordinary.
     """
 
     edinet_code: str

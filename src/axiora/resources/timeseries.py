@@ -46,6 +46,7 @@ class TimeseriesResource(SyncAPIResource):
         *,
         codes: str,
         metric: str | Omit = omit,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -64,6 +65,9 @@ class TimeseriesResource(SyncAPIResource):
           codes: Comma-separated EDINET or securities codes (max 5)
 
           metric: Financial metric to chart
+
+          split_adjusted: Adjust per-share metrics (eps, bps, dividends_per_share) for detected stock
+              splits. Set to false for raw values.
 
           extra_headers: Send extra headers
 
@@ -84,6 +88,7 @@ class TimeseriesResource(SyncAPIResource):
                     {
                         "codes": codes,
                         "metric": metric,
+                        "split_adjusted": split_adjusted,
                         "years": years,
                     },
                     timesery_retrieve_params.TimeseryRetrieveParams,
@@ -118,6 +123,7 @@ class AsyncTimeseriesResource(AsyncAPIResource):
         *,
         codes: str,
         metric: str | Omit = omit,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -136,6 +142,9 @@ class AsyncTimeseriesResource(AsyncAPIResource):
           codes: Comma-separated EDINET or securities codes (max 5)
 
           metric: Financial metric to chart
+
+          split_adjusted: Adjust per-share metrics (eps, bps, dividends_per_share) for detected stock
+              splits. Set to false for raw values.
 
           extra_headers: Send extra headers
 
@@ -156,6 +165,7 @@ class AsyncTimeseriesResource(AsyncAPIResource):
                     {
                         "codes": codes,
                         "metric": metric,
+                        "split_adjusted": split_adjusted,
                         "years": years,
                     },
                     timesery_retrieve_params.TimeseryRetrieveParams,
