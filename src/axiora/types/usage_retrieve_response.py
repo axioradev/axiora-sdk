@@ -19,6 +19,12 @@ class Data(BaseModel):
     tier: str
     """Current pricing tier (e.g. 'free', 'pro')."""
 
+    burst_limit: Optional[int] = None
+    """Max requests per second for current tier."""
+
+    daily_limit: Optional[int] = None
+    """Daily request limit for current tier, null if unlimited."""
+
     requests_today: Optional[int] = None
     """Number of API requests made today."""
 

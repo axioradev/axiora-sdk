@@ -30,6 +30,10 @@ class TestWaitlist:
         waitlist = client.waitlist.join(
             tier="tier",
             email="email",
+            firm="firm",
+            message="message",
+            name="name",
+            source="source",
         )
         assert_matches_type(object, waitlist, path=["response"])
 
@@ -79,6 +83,10 @@ class TestAsyncWaitlist:
         waitlist = await async_client.waitlist.join(
             tier="tier",
             email="email",
+            firm="firm",
+            message="message",
+            name="name",
+            source="source",
         )
         assert_matches_type(object, waitlist, path=["response"])
 

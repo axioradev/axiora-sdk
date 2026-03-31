@@ -31,6 +31,7 @@ class TestTimeseries:
         timesery = client.timeseries.retrieve(
             codes="codes",
             metric="metric",
+            split_adjusted=True,
             years=2,
         )
         assert_matches_type(TimeseryRetrieveResponse, timesery, path=["response"])
@@ -81,6 +82,7 @@ class TestAsyncTimeseries:
         timesery = await async_client.timeseries.retrieve(
             codes="codes",
             metric="metric",
+            split_adjusted=True,
             years=2,
         )
         assert_matches_type(TimeseryRetrieveResponse, timesery, path=["response"])

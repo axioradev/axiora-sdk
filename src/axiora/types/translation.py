@@ -11,8 +11,8 @@ __all__ = ["Translation"]
 class Translation(BaseModel):
     section: str
     """
-    Filing section translated: 'mda', 'risk_factors', 'business_overview',
-    'governance', 'financial_notes', or 'accounting_policy'.
+    Section key: mda, risk_factors, business_overview, governance, financial_notes,
+    or accounting_policy.
     """
 
     translated_at: datetime

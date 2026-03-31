@@ -231,6 +231,7 @@ class CompaniesResource(SyncAPIResource):
         self,
         code: str,
         *,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -243,6 +244,9 @@ class CompaniesResource(SyncAPIResource):
         Year-over-year growth rates and multi-year CAGRs.
 
         Args:
+          split_adjusted: Adjust EPS for detected stock splits before computing growth. Set to false for
+              raw unadjusted values.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -260,7 +264,13 @@ class CompaniesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"years": years}, company_retrieve_growth_params.CompanyRetrieveGrowthParams),
+                query=maybe_transform(
+                    {
+                        "split_adjusted": split_adjusted,
+                        "years": years,
+                    },
+                    company_retrieve_growth_params.CompanyRetrieveGrowthParams,
+                ),
             ),
             cast_to=CompanyRetrieveGrowthResponse,
         )
@@ -380,6 +390,7 @@ class CompaniesResource(SyncAPIResource):
         self,
         code: str,
         *,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -392,6 +403,9 @@ class CompaniesResource(SyncAPIResource):
         Computed financial ratios for a company over time.
 
         Args:
+          split_adjusted: Adjust per-share values (EPS, BPS, DPS) for detected stock splits so the
+              time-series is comparable. Set to false for raw unadjusted values.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -409,7 +423,13 @@ class CompaniesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"years": years}, company_retrieve_ratios_params.CompanyRetrieveRatiosParams),
+                query=maybe_transform(
+                    {
+                        "split_adjusted": split_adjusted,
+                        "years": years,
+                    },
+                    company_retrieve_ratios_params.CompanyRetrieveRatiosParams,
+                ),
             ),
             cast_to=CompanyRetrieveRatiosResponse,
         )
@@ -439,7 +459,8 @@ class CompaniesResource(SyncAPIResource):
           section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
               sustainability, research_and_development, dividend_policy, governance,
               company_history, employees, critical_contracts, capital_expenditures,
-              accounting_policy, segment_info, financial_instruments.
+              accounting_policy, segment_info, financial_instruments, officers,
+              outside_directors, remuneration.
 
           extra_headers: Send extra headers
 
@@ -707,6 +728,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         self,
         code: str,
         *,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -719,6 +741,9 @@ class AsyncCompaniesResource(AsyncAPIResource):
         Year-over-year growth rates and multi-year CAGRs.
 
         Args:
+          split_adjusted: Adjust EPS for detected stock splits before computing growth. Set to false for
+              raw unadjusted values.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -737,7 +762,11 @@ class AsyncCompaniesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"years": years}, company_retrieve_growth_params.CompanyRetrieveGrowthParams
+                    {
+                        "split_adjusted": split_adjusted,
+                        "years": years,
+                    },
+                    company_retrieve_growth_params.CompanyRetrieveGrowthParams,
                 ),
             ),
             cast_to=CompanyRetrieveGrowthResponse,
@@ -860,6 +889,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         self,
         code: str,
         *,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -872,6 +902,9 @@ class AsyncCompaniesResource(AsyncAPIResource):
         Computed financial ratios for a company over time.
 
         Args:
+          split_adjusted: Adjust per-share values (EPS, BPS, DPS) for detected stock splits so the
+              time-series is comparable. Set to false for raw unadjusted values.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -890,7 +923,11 @@ class AsyncCompaniesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"years": years}, company_retrieve_ratios_params.CompanyRetrieveRatiosParams
+                    {
+                        "split_adjusted": split_adjusted,
+                        "years": years,
+                    },
+                    company_retrieve_ratios_params.CompanyRetrieveRatiosParams,
                 ),
             ),
             cast_to=CompanyRetrieveRatiosResponse,
@@ -921,7 +958,8 @@ class AsyncCompaniesResource(AsyncAPIResource):
           section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
               sustainability, research_and_development, dividend_policy, governance,
               company_history, employees, critical_contracts, capital_expenditures,
-              accounting_policy, segment_info, financial_instruments.
+              accounting_policy, segment_info, financial_instruments, officers,
+              outside_directors, remuneration.
 
           extra_headers: Send extra headers
 

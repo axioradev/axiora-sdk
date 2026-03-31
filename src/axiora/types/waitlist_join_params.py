@@ -12,3 +12,11 @@ class WaitlistJoinParams(TypedDict, total=False):
     tier: Required[str]
 
     email: Optional[str]
+
+    firm: Optional[str]
+
+    message: Optional[str]
+
+    name: Optional[str]
+
+    source: Optional[str]

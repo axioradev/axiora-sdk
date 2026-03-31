@@ -19,16 +19,10 @@ class Financial(BaseModel):
     """Last day of the fiscal period (e.g. '2024-03-31')."""
 
     bps: Optional[float] = None
-    """Book value per share in JPY.
-
-    Equity attributable to owners ÷ shares outstanding.
-    """
+    """Book value per share in JPY."""
 
     capex: Optional[int] = None
-    """Capital expenditure in JPY.
-
-    Extracted from investing CF breakdown when available.
-    """
+    """Capital expenditure in JPY. From investing CF."""
 
     capital_stock: Optional[int] = None
     """Stated capital (資本金) in JPY."""
@@ -37,7 +31,7 @@ class Financial(BaseModel):
     """Cash and cash equivalents in JPY. BS item, not CF ending balance."""
 
     comprehensive_income: Optional[int] = None
-    """Comprehensive income in JPY. Net income + other comprehensive income items."""
+    """Comprehensive income in JPY. Net income + OCI."""
 
     cost_of_sales: Optional[int] = None
     """Cost of sales (売上原価) in JPY."""
@@ -58,49 +52,28 @@ class Financial(BaseModel):
     """Deferred tax assets (繰延税金資産) in JPY."""
 
     depreciation: Optional[int] = None
-    """Depreciation and amortization in JPY. May appear in PL notes or CF adjustments."""
+    """Depreciation and amortization in JPY."""
 
     diluted_eps: Optional[float] = None
-    """Diluted earnings per share in JPY.
-
-    Accounts for convertible bonds, stock options, etc.
-    """
+    """Diluted EPS in JPY. Adjusts for convertibles/options."""
 
     dividends_per_share: Optional[float] = None
-    """Annual dividends per share in JPY (e.g.
-
-    75.0). Sum of interim + year-end dividends.
-    """
+    """Annual DPS in JPY (e.g. 75.0). Interim + year-end."""
 
     eps: Optional[float] = None
-    """Basic earnings per share in JPY (e.g.
-
-    285.23). Net income ÷ weighted-average shares outstanding.
-    """
+    """Basic EPS in JPY (e.g. 285.23)."""
 
     extraordinary_income: Optional[int] = None
-    """Extraordinary income (特別利益) in JPY.
-
-    JP-GAAP only; IFRS does not have this line item.
-    """
+    """Extraordinary income (特別利益) in JPY. JP-GAAP only."""
 
     extraordinary_loss: Optional[int] = None
-    """Extraordinary loss (特別損失) in JPY.
-
-    JP-GAAP only; IFRS does not have this line item.
-    """
+    """Extraordinary loss (特別損失) in JPY. JP-GAAP only."""
 
     financing_cf: Optional[int] = None
-    """Cash flow from financing activities in JPY.
-
-    Negative means net repayment/dividends.
-    """
+    """Financing cash flow in JPY. Negative = net repayment."""
 
     goodwill: Optional[int] = None
-    """Goodwill (のれん) in JPY.
-
-    IFRS reports separately; JP-GAAP includes in intangible assets.
-    """
+    """Goodwill (のれん) in JPY. IFRS: separate line; JP-GAAP: in intangibles."""
 
     gross_profit: Optional[int] = None
     """Gross profit (売上総利益) in JPY. Revenue minus cost of sales."""
@@ -108,11 +81,11 @@ class Financial(BaseModel):
     ibd_current: Optional[int] = None
     """Interest-bearing debt, current portion in JPY.
 
-    Short-term borrowings + current portion of long-term debt.
+    Short-term borrowings + current LT debt.
     """
 
     ibd_noncurrent: Optional[int] = None
-    """Interest-bearing debt, non-current portion in JPY.
+    """Interest-bearing debt, non-current in JPY.
 
     Long-term borrowings + bonds payable.
     """
@@ -121,7 +94,7 @@ class Financial(BaseModel):
     """Income before income taxes (税引前当期純利益) in JPY."""
 
     intangible_assets: Optional[int] = None
-    """Intangible assets (無形固定資産) in JPY. Includes goodwill for JP-GAAP filers."""
+    """Intangible assets (無形固定資産) in JPY."""
 
     interest_expense: Optional[int] = None
     """Interest expense (支払利息) in JPY."""
@@ -133,32 +106,25 @@ class Financial(BaseModel):
     """Inventories (棚卸資産) in JPY."""
 
     investing_cf: Optional[int] = None
-    """Cash flow from investing activities in JPY.
-
-    Typically negative (capital deployment).
-    """
+    """Investing cash flow in JPY. Typically negative."""
 
     investment_securities: Optional[int] = None
     """Investment securities (投資有価証券) in JPY."""
 
     is_consolidated: Optional[bool] = None
-    """True if data comes from consolidated financial statements.
-
-    False for standalone/parent-only filers (companies without subsidiaries).
-    """
+    """True for consolidated financials. False for standalone/parent-only filers."""
 
     net_assets: Optional[int] = None
     """Net assets (純資産) in JPY.
 
-    JP-GAAP concept; includes non-controlling interests and stock acquisition
-    rights.
+    JP-GAAP concept; includes NCI and stock acquisition rights.
     """
 
     net_income: Optional[int] = None
     """Net income attributable to owners of the parent in JPY. Null if not reported."""
 
     non_controlling_interests: Optional[int] = None
-    """Non-controlling interests (非支配株主持分) in JPY. Null for standalone filers."""
+    """Non-controlling interests (非支配株主持分) in JPY."""
 
     noncurrent_assets: Optional[int] = None
     """Non-current assets (固定資産) in JPY."""
@@ -173,22 +139,13 @@ class Financial(BaseModel):
     """Cash flow from operating activities in JPY."""
 
     operating_income: Optional[int] = None
-    """Operating income (営業利益) in JPY.
-
-    Null if not reported or if the filer uses a non-standard PL format.
-    """
+    """Operating income (営業利益) in JPY."""
 
     ordinary_income: Optional[int] = None
-    """Ordinary income (経常利益) in JPY.
-
-    JP-GAAP specific; includes non-operating items. Null for IFRS/US-GAAP filers.
-    """
+    """Ordinary income (経常利益) in JPY. JP-GAAP only; includes non-operating items."""
 
     payout_ratio: Optional[float] = None
-    """Dividend payout ratio as percentage (e.g.
-
-    30.0 means 30%). Dividends ÷ net income.
-    """
+    """Payout ratio (%). E.g. 30.0 = 30%. Dividends / NI."""
 
     pe_ratio: Optional[float] = None
     """Price-to-earnings ratio. Derived from market price ÷ EPS when available."""
@@ -200,29 +157,22 @@ class Financial(BaseModel):
     """Retained earnings (利益剰余金) in JPY."""
 
     revenue: Optional[int] = None
-    """Total revenue in JPY.
-
-    IFRS filers report 'Revenue'; JP-GAAP reports '売上高' or '営業収益'. Null if
-    not reported.
-    """
+    """Revenue (売上高) in JPY. IFRS: Revenue; JP-GAAP: 売上高 or 営業収益."""
 
     rnd_expenses: Optional[int] = None
-    """Research and development expenses (研究開発費) in JPY.
-
-    Disclosed in notes to financials.
-    """
+    """R&D expenses (研究開発費) in JPY."""
 
     roe: Optional[float] = None
-    """Return on equity as percentage (e.g.
-
-    12.5 means 12.5%). Null when equity or net income is unavailable.
-    """
+    """Return on equity (%). E.g. 12.5 means 12.5%."""
 
     sga: Optional[int] = None
     """Selling, general and administrative expenses (販管費) in JPY."""
 
     shares_issued: Optional[int] = None
     """Total shares issued (発行済株式総数). Includes treasury stock."""
+
+    shares_outstanding_at_filing: Optional[int] = None
+    """Shares outstanding at filing date (提出日現在の発行済株式総数). DEI header."""
 
     source_doc_id: Optional[str] = None
     """EDINET document ID of the source filing (e.g. 'S100ABCD')."""

@@ -15,10 +15,7 @@ class Ratio(BaseModel):
     """Book value per share in JPY."""
 
     current_ratio: Optional[float] = None
-    """Current ratio.
-
-    Current assets ÷ current liabilities. Above 1.0 means short-term solvency.
-    """
+    """Current ratio. Current assets / current liabilities."""
 
     debt_to_equity: Optional[float] = None
     """Debt-to-equity ratio. Total liabilities ÷ total equity."""

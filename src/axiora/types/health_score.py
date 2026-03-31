@@ -10,10 +10,7 @@ __all__ = ["HealthScore"]
 
 class HealthScore(BaseModel):
     components: Dict[str, float]
-    """Point breakdown by component (e.g.
-
-    {'stability': 15.0, 'profitability': 18.0, 'cash_flow': 7.5}).
-    """
+    """Score breakdown by component (stability, profitability, cash_flow)."""
 
     computed_at: datetime
     """When the score was computed."""
@@ -25,13 +22,10 @@ class HealthScore(BaseModel):
     """Fiscal year the score is based on."""
 
     flags: List[str]
-    """Risk flags (e.g.
-
-    ['net_loss', 'negative_operating_cf']). Empty list if no flags.
-    """
+    """Risk flags (e.g. net_loss, negative_operating_cf)."""
 
     industry_adjustment: float
-    """Industry adjustment points (-5 to +5). Compares against TSE 33-sector medians."""
+    """Industry adjustment points (-5 to +5) vs sector medians."""
 
     score: int
     """Financial health score from 0 to 100. Higher is healthier."""

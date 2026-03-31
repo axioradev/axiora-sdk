@@ -24,10 +24,7 @@ class Data(BaseModel):
     """Subscribed event types (e.g. ['new_filing', 'amendment'])."""
 
     secret: str
-    """HMAC-SHA256 signing secret (64 hex characters).
-
-    Only returned once at creation time.
-    """
+    """HMAC-SHA256 signing secret (64 hex chars). Shown once."""
 
     url: str
     """HTTPS URL that receives webhook deliveries."""
