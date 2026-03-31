@@ -25,9 +25,9 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.filing_list_response import FilingListResponse
+from ..types.list_response_section import ListResponseSection
 from ..types.filing_calendar_response import FilingCalendarResponse
 from ..types.filing_retrieve_response import FilingRetrieveResponse
-from ..types.filing_retrieve_sections_response import FilingRetrieveSectionsResponse
 from ..types.filing_retrieve_translations_response import FilingRetrieveTranslationsResponse
 
 __all__ = ["FilingsResource", "AsyncFilingsResource"]
@@ -208,7 +208,7 @@ class FilingsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FilingRetrieveSectionsResponse:
+    ) -> ListResponseSection:
         """
         Get text sections from a specific filing.
 
@@ -243,7 +243,7 @@ class FilingsResource(SyncAPIResource):
                     {"section": section}, filing_retrieve_sections_params.FilingRetrieveSectionsParams
                 ),
             ),
-            cast_to=FilingRetrieveSectionsResponse,
+            cast_to=ListResponseSection,
         )
 
     def retrieve_translations(
@@ -464,7 +464,7 @@ class AsyncFilingsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FilingRetrieveSectionsResponse:
+    ) -> ListResponseSection:
         """
         Get text sections from a specific filing.
 
@@ -499,7 +499,7 @@ class AsyncFilingsResource(AsyncAPIResource):
                     {"section": section}, filing_retrieve_sections_params.FilingRetrieveSectionsParams
                 ),
             ),
-            cast_to=FilingRetrieveSectionsResponse,
+            cast_to=ListResponseSection,
         )
 
     async def retrieve_translations(

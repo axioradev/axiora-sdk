@@ -11,9 +11,9 @@ from axiora import Axiora, AsyncAxiora
 from tests.utils import assert_matches_type
 from axiora.types import (
     FilingListResponse,
+    ListResponseSection,
     FilingCalendarResponse,
     FilingRetrieveResponse,
-    FilingRetrieveSectionsResponse,
     FilingRetrieveTranslationsResponse,
 )
 from axiora._utils import parse_date, parse_datetime
@@ -149,7 +149,7 @@ class TestFilings:
         filing = client.filings.retrieve_sections(
             doc_id="doc_id",
         )
-        assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+        assert_matches_type(ListResponseSection, filing, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -158,7 +158,7 @@ class TestFilings:
             doc_id="doc_id",
             section="section",
         )
-        assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+        assert_matches_type(ListResponseSection, filing, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -170,7 +170,7 @@ class TestFilings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         filing = response.parse()
-        assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+        assert_matches_type(ListResponseSection, filing, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -182,7 +182,7 @@ class TestFilings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             filing = response.parse()
-            assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+            assert_matches_type(ListResponseSection, filing, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -376,7 +376,7 @@ class TestAsyncFilings:
         filing = await async_client.filings.retrieve_sections(
             doc_id="doc_id",
         )
-        assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+        assert_matches_type(ListResponseSection, filing, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -385,7 +385,7 @@ class TestAsyncFilings:
             doc_id="doc_id",
             section="section",
         )
-        assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+        assert_matches_type(ListResponseSection, filing, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -397,7 +397,7 @@ class TestAsyncFilings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         filing = await response.parse()
-        assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+        assert_matches_type(ListResponseSection, filing, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -409,7 +409,7 @@ class TestAsyncFilings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             filing = await response.parse()
-            assert_matches_type(FilingRetrieveSectionsResponse, filing, path=["response"])
+            assert_matches_type(ListResponseSection, filing, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

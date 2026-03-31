@@ -12,10 +12,18 @@ from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
+    BinaryAPIResponse,
+    AsyncBinaryAPIResponse,
+    StreamedBinaryAPIResponse,
+    AsyncStreamedBinaryAPIResponse,
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
+    to_custom_raw_response_wrapper,
     async_to_streamed_response_wrapper,
+    to_custom_streamed_response_wrapper,
+    async_to_custom_raw_response_wrapper,
+    async_to_custom_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
 from ..types.bulk_export_financials_json_response import BulkExportFinancialsJsonResponse
@@ -151,6 +159,56 @@ class BulkResource(SyncAPIResource):
             cast_to=BulkExportFinancialsJsonResponse,
         )
 
+    def export_ownership_signals(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BinaryAPIResponse:
+        """
+        Export all ownership signals as Parquet.
+
+        Returns the full ownership signals dataset in Apache Parquet format. Requires
+        institutional tier.
+        """
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return self._get(
+            "/v1/bulk/ownership_signals.parquet",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BinaryAPIResponse,
+        )
+
+    def export_ownership_trajectories(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BinaryAPIResponse:
+        """
+        Export all ownership trajectories as Parquet.
+
+        Returns the full ownership trajectory dataset in Apache Parquet format, readable
+        by pandas, polars, DuckDB, and other data tools. Requires institutional tier.
+        """
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return self._get(
+            "/v1/bulk/ownership_trajectories.parquet",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BinaryAPIResponse,
+        )
+
 
 class AsyncBulkResource(AsyncAPIResource):
     @cached_property
@@ -280,6 +338,56 @@ class AsyncBulkResource(AsyncAPIResource):
             cast_to=BulkExportFinancialsJsonResponse,
         )
 
+    async def export_ownership_signals(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncBinaryAPIResponse:
+        """
+        Export all ownership signals as Parquet.
+
+        Returns the full ownership signals dataset in Apache Parquet format. Requires
+        institutional tier.
+        """
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return await self._get(
+            "/v1/bulk/ownership_signals.parquet",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AsyncBinaryAPIResponse,
+        )
+
+    async def export_ownership_trajectories(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncBinaryAPIResponse:
+        """
+        Export all ownership trajectories as Parquet.
+
+        Returns the full ownership trajectory dataset in Apache Parquet format, readable
+        by pandas, polars, DuckDB, and other data tools. Requires institutional tier.
+        """
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        return await self._get(
+            "/v1/bulk/ownership_trajectories.parquet",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AsyncBinaryAPIResponse,
+        )
+
 
 class BulkResourceWithRawResponse:
     def __init__(self, bulk: BulkResource) -> None:
@@ -290,6 +398,14 @@ class BulkResourceWithRawResponse:
         )
         self.export_financials_json = to_raw_response_wrapper(
             bulk.export_financials_json,
+        )
+        self.export_ownership_signals = to_custom_raw_response_wrapper(
+            bulk.export_ownership_signals,
+            BinaryAPIResponse,
+        )
+        self.export_ownership_trajectories = to_custom_raw_response_wrapper(
+            bulk.export_ownership_trajectories,
+            BinaryAPIResponse,
         )
 
 
@@ -303,6 +419,14 @@ class AsyncBulkResourceWithRawResponse:
         self.export_financials_json = async_to_raw_response_wrapper(
             bulk.export_financials_json,
         )
+        self.export_ownership_signals = async_to_custom_raw_response_wrapper(
+            bulk.export_ownership_signals,
+            AsyncBinaryAPIResponse,
+        )
+        self.export_ownership_trajectories = async_to_custom_raw_response_wrapper(
+            bulk.export_ownership_trajectories,
+            AsyncBinaryAPIResponse,
+        )
 
 
 class BulkResourceWithStreamingResponse:
@@ -315,6 +439,14 @@ class BulkResourceWithStreamingResponse:
         self.export_financials_json = to_streamed_response_wrapper(
             bulk.export_financials_json,
         )
+        self.export_ownership_signals = to_custom_streamed_response_wrapper(
+            bulk.export_ownership_signals,
+            StreamedBinaryAPIResponse,
+        )
+        self.export_ownership_trajectories = to_custom_streamed_response_wrapper(
+            bulk.export_ownership_trajectories,
+            StreamedBinaryAPIResponse,
+        )
 
 
 class AsyncBulkResourceWithStreamingResponse:
@@ -326,4 +458,12 @@ class AsyncBulkResourceWithStreamingResponse:
         )
         self.export_financials_json = async_to_streamed_response_wrapper(
             bulk.export_financials_json,
+        )
+        self.export_ownership_signals = async_to_custom_streamed_response_wrapper(
+            bulk.export_ownership_signals,
+            AsyncStreamedBinaryAPIResponse,
+        )
+        self.export_ownership_trajectories = async_to_custom_streamed_response_wrapper(
+            bulk.export_ownership_trajectories,
+            AsyncStreamedBinaryAPIResponse,
         )

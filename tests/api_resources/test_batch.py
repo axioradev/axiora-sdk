@@ -9,7 +9,7 @@ import pytest
 
 from axiora import Axiora, AsyncAxiora
 from tests.utils import assert_matches_type
-from axiora.types import BatchFetchFinancialsResponse
+from axiora.types import ListResponseFinancial
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +23,7 @@ class TestBatch:
         batch = client.batch.fetch_financials(
             codes=["string"],
         )
-        assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+        assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -33,7 +33,7 @@ class TestBatch:
             fields=["string"],
             years=1,
         )
-        assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+        assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -45,7 +45,7 @@ class TestBatch:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         batch = response.parse()
-        assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+        assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -57,7 +57,7 @@ class TestBatch:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             batch = response.parse()
-            assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+            assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -73,7 +73,7 @@ class TestAsyncBatch:
         batch = await async_client.batch.fetch_financials(
             codes=["string"],
         )
-        assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+        assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -83,7 +83,7 @@ class TestAsyncBatch:
             fields=["string"],
             years=1,
         )
-        assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+        assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -95,7 +95,7 @@ class TestAsyncBatch:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         batch = await response.parse()
-        assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+        assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -107,6 +107,6 @@ class TestAsyncBatch:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             batch = await response.parse()
-            assert_matches_type(BatchFetchFinancialsResponse, batch, path=["response"])
+            assert_matches_type(ListResponseFinancial, batch, path=["response"])
 
         assert cast(Any, response.is_closed) is True
