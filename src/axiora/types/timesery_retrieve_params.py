@@ -14,4 +14,10 @@ class TimeseryRetrieveParams(TypedDict, total=False):
     metric: str
     """Financial metric to chart"""
 
+    split_adjusted: bool
+    """
+    Adjust per-share metrics (eps, bps, dividends_per_share) for detected stock
+    splits. Set to false for raw values.
+    """
+
     years: int

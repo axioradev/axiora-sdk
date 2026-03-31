@@ -37,13 +37,7 @@ class Company(BaseModel):
     """TSE 33-sector classification in Japanese (e.g. '輸送用機器')."""
 
     sector_en: Optional[str] = None
-    """TSE 33-sector classification in English (e.g.
-
-    'Transportation Equipment'). Auto-translated from sector.
-    """
+    """TSE 33-sector in English. Auto-translated."""
 
     securities_code: Optional[str] = None
-    """TSE securities code, typically 4 digits (e.g.
-
-    '7203'). Null for unlisted companies.
-    """
+    """TSE securities code, 4 digits (e.g. '7203')."""

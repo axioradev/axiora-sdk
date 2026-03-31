@@ -219,7 +219,8 @@ class FilingsResource(SyncAPIResource):
           section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
               sustainability, research_and_development, dividend_policy, governance,
               company_history, employees, critical_contracts, capital_expenditures,
-              accounting_policy, segment_info, financial_instruments.
+              accounting_policy, segment_info, financial_instruments, officers,
+              outside_directors, remuneration.
 
           extra_headers: Send extra headers
 
@@ -474,7 +475,8 @@ class AsyncFilingsResource(AsyncAPIResource):
           section: Filter by section key. One of: mda, risk_factors, business_overview, strategy,
               sustainability, research_and_development, dividend_policy, governance,
               company_history, employees, critical_contracts, capital_expenditures,
-              accounting_policy, segment_info, financial_instruments.
+              accounting_policy, segment_info, financial_instruments, officers,
+              outside_directors, remuneration.
 
           extra_headers: Send extra headers
 
