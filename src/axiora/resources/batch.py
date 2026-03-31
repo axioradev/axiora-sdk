@@ -18,7 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.batch_fetch_financials_response import BatchFetchFinancialsResponse
+from ..types.list_response_financial import ListResponseFinancial
 
 __all__ = ["BatchResource", "AsyncBatchResource"]
 
@@ -55,7 +55,7 @@ class BatchResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BatchFetchFinancialsResponse:
+    ) -> ListResponseFinancial:
         """
         Fetch financials for multiple companies in one request.
 
@@ -90,7 +90,7 @@ class BatchResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BatchFetchFinancialsResponse,
+            cast_to=ListResponseFinancial,
         )
 
 
@@ -126,7 +126,7 @@ class AsyncBatchResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BatchFetchFinancialsResponse:
+    ) -> ListResponseFinancial:
         """
         Fetch financials for multiple companies in one request.
 
@@ -161,7 +161,7 @@ class AsyncBatchResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BatchFetchFinancialsResponse,
+            cast_to=ListResponseFinancial,
         )
 
 

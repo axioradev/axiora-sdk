@@ -5,7 +5,7 @@ from typing import List, Optional
 from .meta import Meta
 from .._models import BaseModel
 
-__all__ = ["CompanyRetrieveSectionsResponse", "Data"]
+__all__ = ["ListResponseSection", "Data"]
 
 
 class Data(BaseModel):
@@ -28,7 +28,7 @@ class Data(BaseModel):
     """English translation, if available. Null when not yet translated."""
 
 
-class CompanyRetrieveSectionsResponse(BaseModel):
+class ListResponseSection(BaseModel):
     data: List[Data]
     """Array of result objects."""
 

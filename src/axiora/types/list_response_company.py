@@ -6,10 +6,10 @@ from .meta import Meta
 from .company import Company
 from .._models import BaseModel
 
-__all__ = ["ListResponse"]
+__all__ = ["ListResponseCompany"]
 
 
-class ListResponse(BaseModel):
+class ListResponseCompany(BaseModel):
     data: List[Company]
     """Array of result objects."""
 
