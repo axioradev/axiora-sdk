@@ -4,13 +4,13 @@ from typing import List
 
 from .meta import Meta
 from .._models import BaseModel
-from .financial import Financial
+from .capital_allocation import CapitalAllocation
 
-__all__ = ["BatchFetchFinancialsResponse"]
+__all__ = ["CapitalAllocationListRankingResponse"]
 
 
-class BatchFetchFinancialsResponse(BaseModel):
-    data: List[Financial]
+class CapitalAllocationListRankingResponse(BaseModel):
+    data: List[CapitalAllocation]
     """Array of result objects."""
 
     meta: Meta

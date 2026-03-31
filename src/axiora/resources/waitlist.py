@@ -18,6 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.waitlist_join_response import WaitlistJoinResponse
 
 __all__ = ["WaitlistResource", "AsyncWaitlistResource"]
 
@@ -57,7 +58,7 @@ class WaitlistResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WaitlistJoinResponse:
         """
         Join Waitlist
 
@@ -86,7 +87,7 @@ class WaitlistResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WaitlistJoinResponse,
         )
 
 
@@ -125,7 +126,7 @@ class AsyncWaitlistResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WaitlistJoinResponse:
         """
         Join Waitlist
 
@@ -154,7 +155,7 @@ class AsyncWaitlistResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WaitlistJoinResponse,
         )
 
 

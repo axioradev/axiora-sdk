@@ -37,21 +37,32 @@ if TYPE_CHECKING:
         bulk,
         keys,
         batch,
+        oauth,
         usage,
         health,
         screen,
+        voting,
         compare,
         filings,
         sectors,
+        buybacks,
         coverage,
+        earnings,
         rankings,
         sections,
         waitlist,
         webhooks,
         companies,
         freshness,
+        investors,
+        ownership,
+        watchlist,
         timeseries,
+        well_known,
         translations,
+        relationships,
+        shareholdings,
+        capital_allocation,
     )
     from .resources.bulk import BulkResource, AsyncBulkResource
     from .resources.keys import KeysResource, AsyncKeysResource
@@ -59,18 +70,29 @@ if TYPE_CHECKING:
     from .resources.usage import UsageResource, AsyncUsageResource
     from .resources.health import HealthResource, AsyncHealthResource
     from .resources.screen import ScreenResource, AsyncScreenResource
+    from .resources.voting import VotingResource, AsyncVotingResource
     from .resources.compare import CompareResource, AsyncCompareResource
     from .resources.filings import FilingsResource, AsyncFilingsResource
     from .resources.sectors import SectorsResource, AsyncSectorsResource
+    from .resources.buybacks import BuybacksResource, AsyncBuybacksResource
     from .resources.coverage import CoverageResource, AsyncCoverageResource
+    from .resources.earnings import EarningsResource, AsyncEarningsResource
     from .resources.rankings import RankingsResource, AsyncRankingsResource
     from .resources.sections import SectionsResource, AsyncSectionsResource
     from .resources.waitlist import WaitlistResource, AsyncWaitlistResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
-    from .resources.companies import CompaniesResource, AsyncCompaniesResource
     from .resources.freshness import FreshnessResource, AsyncFreshnessResource
+    from .resources.investors import InvestorsResource, AsyncInvestorsResource
+    from .resources.ownership import OwnershipResource, AsyncOwnershipResource
+    from .resources.watchlist import WatchlistResource, AsyncWatchlistResource
     from .resources.timeseries import TimeseriesResource, AsyncTimeseriesResource
+    from .resources.oauth.oauth import OAuthResource, AsyncOAuthResource
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
+    from .resources.relationships import RelationshipsResource, AsyncRelationshipsResource
+    from .resources.shareholdings import ShareholdingsResource, AsyncShareholdingsResource
+    from .resources.capital_allocation import CapitalAllocationResource, AsyncCapitalAllocationResource
+    from .resources.companies.companies import CompaniesResource, AsyncCompaniesResource
+    from .resources.well_known.well_known import WellKnownResource, AsyncWellKnownResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Axiora", "AsyncAxiora", "Client", "AsyncClient"]
 
@@ -233,6 +255,72 @@ class Axiora(SyncAPIClient):
         from .resources.sections import SectionsResource
 
         return SectionsResource(self)
+
+    @cached_property
+    def buybacks(self) -> BuybacksResource:
+        from .resources.buybacks import BuybacksResource
+
+        return BuybacksResource(self)
+
+    @cached_property
+    def shareholdings(self) -> ShareholdingsResource:
+        from .resources.shareholdings import ShareholdingsResource
+
+        return ShareholdingsResource(self)
+
+    @cached_property
+    def ownership(self) -> OwnershipResource:
+        from .resources.ownership import OwnershipResource
+
+        return OwnershipResource(self)
+
+    @cached_property
+    def capital_allocation(self) -> CapitalAllocationResource:
+        from .resources.capital_allocation import CapitalAllocationResource
+
+        return CapitalAllocationResource(self)
+
+    @cached_property
+    def voting(self) -> VotingResource:
+        from .resources.voting import VotingResource
+
+        return VotingResource(self)
+
+    @cached_property
+    def earnings(self) -> EarningsResource:
+        from .resources.earnings import EarningsResource
+
+        return EarningsResource(self)
+
+    @cached_property
+    def investors(self) -> InvestorsResource:
+        from .resources.investors import InvestorsResource
+
+        return InvestorsResource(self)
+
+    @cached_property
+    def watchlist(self) -> WatchlistResource:
+        from .resources.watchlist import WatchlistResource
+
+        return WatchlistResource(self)
+
+    @cached_property
+    def relationships(self) -> RelationshipsResource:
+        from .resources.relationships import RelationshipsResource
+
+        return RelationshipsResource(self)
+
+    @cached_property
+    def well_known(self) -> WellKnownResource:
+        from .resources.well_known import WellKnownResource
+
+        return WellKnownResource(self)
+
+    @cached_property
+    def oauth(self) -> OAuthResource:
+        from .resources.oauth import OAuthResource
+
+        return OAuthResource(self)
 
     @cached_property
     def with_raw_response(self) -> AxioraWithRawResponse:
@@ -523,6 +611,72 @@ class AsyncAxiora(AsyncAPIClient):
         return AsyncSectionsResource(self)
 
     @cached_property
+    def buybacks(self) -> AsyncBuybacksResource:
+        from .resources.buybacks import AsyncBuybacksResource
+
+        return AsyncBuybacksResource(self)
+
+    @cached_property
+    def shareholdings(self) -> AsyncShareholdingsResource:
+        from .resources.shareholdings import AsyncShareholdingsResource
+
+        return AsyncShareholdingsResource(self)
+
+    @cached_property
+    def ownership(self) -> AsyncOwnershipResource:
+        from .resources.ownership import AsyncOwnershipResource
+
+        return AsyncOwnershipResource(self)
+
+    @cached_property
+    def capital_allocation(self) -> AsyncCapitalAllocationResource:
+        from .resources.capital_allocation import AsyncCapitalAllocationResource
+
+        return AsyncCapitalAllocationResource(self)
+
+    @cached_property
+    def voting(self) -> AsyncVotingResource:
+        from .resources.voting import AsyncVotingResource
+
+        return AsyncVotingResource(self)
+
+    @cached_property
+    def earnings(self) -> AsyncEarningsResource:
+        from .resources.earnings import AsyncEarningsResource
+
+        return AsyncEarningsResource(self)
+
+    @cached_property
+    def investors(self) -> AsyncInvestorsResource:
+        from .resources.investors import AsyncInvestorsResource
+
+        return AsyncInvestorsResource(self)
+
+    @cached_property
+    def watchlist(self) -> AsyncWatchlistResource:
+        from .resources.watchlist import AsyncWatchlistResource
+
+        return AsyncWatchlistResource(self)
+
+    @cached_property
+    def relationships(self) -> AsyncRelationshipsResource:
+        from .resources.relationships import AsyncRelationshipsResource
+
+        return AsyncRelationshipsResource(self)
+
+    @cached_property
+    def well_known(self) -> AsyncWellKnownResource:
+        from .resources.well_known import AsyncWellKnownResource
+
+        return AsyncWellKnownResource(self)
+
+    @cached_property
+    def oauth(self) -> AsyncOAuthResource:
+        from .resources.oauth import AsyncOAuthResource
+
+        return AsyncOAuthResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncAxioraWithRawResponse:
         return AsyncAxioraWithRawResponse(self)
 
@@ -765,6 +919,72 @@ class AxioraWithRawResponse:
 
         return SectionsResourceWithRawResponse(self._client.sections)
 
+    @cached_property
+    def buybacks(self) -> buybacks.BuybacksResourceWithRawResponse:
+        from .resources.buybacks import BuybacksResourceWithRawResponse
+
+        return BuybacksResourceWithRawResponse(self._client.buybacks)
+
+    @cached_property
+    def shareholdings(self) -> shareholdings.ShareholdingsResourceWithRawResponse:
+        from .resources.shareholdings import ShareholdingsResourceWithRawResponse
+
+        return ShareholdingsResourceWithRawResponse(self._client.shareholdings)
+
+    @cached_property
+    def ownership(self) -> ownership.OwnershipResourceWithRawResponse:
+        from .resources.ownership import OwnershipResourceWithRawResponse
+
+        return OwnershipResourceWithRawResponse(self._client.ownership)
+
+    @cached_property
+    def capital_allocation(self) -> capital_allocation.CapitalAllocationResourceWithRawResponse:
+        from .resources.capital_allocation import CapitalAllocationResourceWithRawResponse
+
+        return CapitalAllocationResourceWithRawResponse(self._client.capital_allocation)
+
+    @cached_property
+    def voting(self) -> voting.VotingResourceWithRawResponse:
+        from .resources.voting import VotingResourceWithRawResponse
+
+        return VotingResourceWithRawResponse(self._client.voting)
+
+    @cached_property
+    def earnings(self) -> earnings.EarningsResourceWithRawResponse:
+        from .resources.earnings import EarningsResourceWithRawResponse
+
+        return EarningsResourceWithRawResponse(self._client.earnings)
+
+    @cached_property
+    def investors(self) -> investors.InvestorsResourceWithRawResponse:
+        from .resources.investors import InvestorsResourceWithRawResponse
+
+        return InvestorsResourceWithRawResponse(self._client.investors)
+
+    @cached_property
+    def watchlist(self) -> watchlist.WatchlistResourceWithRawResponse:
+        from .resources.watchlist import WatchlistResourceWithRawResponse
+
+        return WatchlistResourceWithRawResponse(self._client.watchlist)
+
+    @cached_property
+    def relationships(self) -> relationships.RelationshipsResourceWithRawResponse:
+        from .resources.relationships import RelationshipsResourceWithRawResponse
+
+        return RelationshipsResourceWithRawResponse(self._client.relationships)
+
+    @cached_property
+    def well_known(self) -> well_known.WellKnownResourceWithRawResponse:
+        from .resources.well_known import WellKnownResourceWithRawResponse
+
+        return WellKnownResourceWithRawResponse(self._client.well_known)
+
+    @cached_property
+    def oauth(self) -> oauth.OAuthResourceWithRawResponse:
+        from .resources.oauth import OAuthResourceWithRawResponse
+
+        return OAuthResourceWithRawResponse(self._client.oauth)
+
 
 class AsyncAxioraWithRawResponse:
     _client: AsyncAxiora
@@ -879,6 +1099,72 @@ class AsyncAxioraWithRawResponse:
         from .resources.sections import AsyncSectionsResourceWithRawResponse
 
         return AsyncSectionsResourceWithRawResponse(self._client.sections)
+
+    @cached_property
+    def buybacks(self) -> buybacks.AsyncBuybacksResourceWithRawResponse:
+        from .resources.buybacks import AsyncBuybacksResourceWithRawResponse
+
+        return AsyncBuybacksResourceWithRawResponse(self._client.buybacks)
+
+    @cached_property
+    def shareholdings(self) -> shareholdings.AsyncShareholdingsResourceWithRawResponse:
+        from .resources.shareholdings import AsyncShareholdingsResourceWithRawResponse
+
+        return AsyncShareholdingsResourceWithRawResponse(self._client.shareholdings)
+
+    @cached_property
+    def ownership(self) -> ownership.AsyncOwnershipResourceWithRawResponse:
+        from .resources.ownership import AsyncOwnershipResourceWithRawResponse
+
+        return AsyncOwnershipResourceWithRawResponse(self._client.ownership)
+
+    @cached_property
+    def capital_allocation(self) -> capital_allocation.AsyncCapitalAllocationResourceWithRawResponse:
+        from .resources.capital_allocation import AsyncCapitalAllocationResourceWithRawResponse
+
+        return AsyncCapitalAllocationResourceWithRawResponse(self._client.capital_allocation)
+
+    @cached_property
+    def voting(self) -> voting.AsyncVotingResourceWithRawResponse:
+        from .resources.voting import AsyncVotingResourceWithRawResponse
+
+        return AsyncVotingResourceWithRawResponse(self._client.voting)
+
+    @cached_property
+    def earnings(self) -> earnings.AsyncEarningsResourceWithRawResponse:
+        from .resources.earnings import AsyncEarningsResourceWithRawResponse
+
+        return AsyncEarningsResourceWithRawResponse(self._client.earnings)
+
+    @cached_property
+    def investors(self) -> investors.AsyncInvestorsResourceWithRawResponse:
+        from .resources.investors import AsyncInvestorsResourceWithRawResponse
+
+        return AsyncInvestorsResourceWithRawResponse(self._client.investors)
+
+    @cached_property
+    def watchlist(self) -> watchlist.AsyncWatchlistResourceWithRawResponse:
+        from .resources.watchlist import AsyncWatchlistResourceWithRawResponse
+
+        return AsyncWatchlistResourceWithRawResponse(self._client.watchlist)
+
+    @cached_property
+    def relationships(self) -> relationships.AsyncRelationshipsResourceWithRawResponse:
+        from .resources.relationships import AsyncRelationshipsResourceWithRawResponse
+
+        return AsyncRelationshipsResourceWithRawResponse(self._client.relationships)
+
+    @cached_property
+    def well_known(self) -> well_known.AsyncWellKnownResourceWithRawResponse:
+        from .resources.well_known import AsyncWellKnownResourceWithRawResponse
+
+        return AsyncWellKnownResourceWithRawResponse(self._client.well_known)
+
+    @cached_property
+    def oauth(self) -> oauth.AsyncOAuthResourceWithRawResponse:
+        from .resources.oauth import AsyncOAuthResourceWithRawResponse
+
+        return AsyncOAuthResourceWithRawResponse(self._client.oauth)
 
 
 class AxioraWithStreamedResponse:
@@ -995,6 +1281,72 @@ class AxioraWithStreamedResponse:
 
         return SectionsResourceWithStreamingResponse(self._client.sections)
 
+    @cached_property
+    def buybacks(self) -> buybacks.BuybacksResourceWithStreamingResponse:
+        from .resources.buybacks import BuybacksResourceWithStreamingResponse
+
+        return BuybacksResourceWithStreamingResponse(self._client.buybacks)
+
+    @cached_property
+    def shareholdings(self) -> shareholdings.ShareholdingsResourceWithStreamingResponse:
+        from .resources.shareholdings import ShareholdingsResourceWithStreamingResponse
+
+        return ShareholdingsResourceWithStreamingResponse(self._client.shareholdings)
+
+    @cached_property
+    def ownership(self) -> ownership.OwnershipResourceWithStreamingResponse:
+        from .resources.ownership import OwnershipResourceWithStreamingResponse
+
+        return OwnershipResourceWithStreamingResponse(self._client.ownership)
+
+    @cached_property
+    def capital_allocation(self) -> capital_allocation.CapitalAllocationResourceWithStreamingResponse:
+        from .resources.capital_allocation import CapitalAllocationResourceWithStreamingResponse
+
+        return CapitalAllocationResourceWithStreamingResponse(self._client.capital_allocation)
+
+    @cached_property
+    def voting(self) -> voting.VotingResourceWithStreamingResponse:
+        from .resources.voting import VotingResourceWithStreamingResponse
+
+        return VotingResourceWithStreamingResponse(self._client.voting)
+
+    @cached_property
+    def earnings(self) -> earnings.EarningsResourceWithStreamingResponse:
+        from .resources.earnings import EarningsResourceWithStreamingResponse
+
+        return EarningsResourceWithStreamingResponse(self._client.earnings)
+
+    @cached_property
+    def investors(self) -> investors.InvestorsResourceWithStreamingResponse:
+        from .resources.investors import InvestorsResourceWithStreamingResponse
+
+        return InvestorsResourceWithStreamingResponse(self._client.investors)
+
+    @cached_property
+    def watchlist(self) -> watchlist.WatchlistResourceWithStreamingResponse:
+        from .resources.watchlist import WatchlistResourceWithStreamingResponse
+
+        return WatchlistResourceWithStreamingResponse(self._client.watchlist)
+
+    @cached_property
+    def relationships(self) -> relationships.RelationshipsResourceWithStreamingResponse:
+        from .resources.relationships import RelationshipsResourceWithStreamingResponse
+
+        return RelationshipsResourceWithStreamingResponse(self._client.relationships)
+
+    @cached_property
+    def well_known(self) -> well_known.WellKnownResourceWithStreamingResponse:
+        from .resources.well_known import WellKnownResourceWithStreamingResponse
+
+        return WellKnownResourceWithStreamingResponse(self._client.well_known)
+
+    @cached_property
+    def oauth(self) -> oauth.OAuthResourceWithStreamingResponse:
+        from .resources.oauth import OAuthResourceWithStreamingResponse
+
+        return OAuthResourceWithStreamingResponse(self._client.oauth)
+
 
 class AsyncAxioraWithStreamedResponse:
     _client: AsyncAxiora
@@ -1109,6 +1461,72 @@ class AsyncAxioraWithStreamedResponse:
         from .resources.sections import AsyncSectionsResourceWithStreamingResponse
 
         return AsyncSectionsResourceWithStreamingResponse(self._client.sections)
+
+    @cached_property
+    def buybacks(self) -> buybacks.AsyncBuybacksResourceWithStreamingResponse:
+        from .resources.buybacks import AsyncBuybacksResourceWithStreamingResponse
+
+        return AsyncBuybacksResourceWithStreamingResponse(self._client.buybacks)
+
+    @cached_property
+    def shareholdings(self) -> shareholdings.AsyncShareholdingsResourceWithStreamingResponse:
+        from .resources.shareholdings import AsyncShareholdingsResourceWithStreamingResponse
+
+        return AsyncShareholdingsResourceWithStreamingResponse(self._client.shareholdings)
+
+    @cached_property
+    def ownership(self) -> ownership.AsyncOwnershipResourceWithStreamingResponse:
+        from .resources.ownership import AsyncOwnershipResourceWithStreamingResponse
+
+        return AsyncOwnershipResourceWithStreamingResponse(self._client.ownership)
+
+    @cached_property
+    def capital_allocation(self) -> capital_allocation.AsyncCapitalAllocationResourceWithStreamingResponse:
+        from .resources.capital_allocation import AsyncCapitalAllocationResourceWithStreamingResponse
+
+        return AsyncCapitalAllocationResourceWithStreamingResponse(self._client.capital_allocation)
+
+    @cached_property
+    def voting(self) -> voting.AsyncVotingResourceWithStreamingResponse:
+        from .resources.voting import AsyncVotingResourceWithStreamingResponse
+
+        return AsyncVotingResourceWithStreamingResponse(self._client.voting)
+
+    @cached_property
+    def earnings(self) -> earnings.AsyncEarningsResourceWithStreamingResponse:
+        from .resources.earnings import AsyncEarningsResourceWithStreamingResponse
+
+        return AsyncEarningsResourceWithStreamingResponse(self._client.earnings)
+
+    @cached_property
+    def investors(self) -> investors.AsyncInvestorsResourceWithStreamingResponse:
+        from .resources.investors import AsyncInvestorsResourceWithStreamingResponse
+
+        return AsyncInvestorsResourceWithStreamingResponse(self._client.investors)
+
+    @cached_property
+    def watchlist(self) -> watchlist.AsyncWatchlistResourceWithStreamingResponse:
+        from .resources.watchlist import AsyncWatchlistResourceWithStreamingResponse
+
+        return AsyncWatchlistResourceWithStreamingResponse(self._client.watchlist)
+
+    @cached_property
+    def relationships(self) -> relationships.AsyncRelationshipsResourceWithStreamingResponse:
+        from .resources.relationships import AsyncRelationshipsResourceWithStreamingResponse
+
+        return AsyncRelationshipsResourceWithStreamingResponse(self._client.relationships)
+
+    @cached_property
+    def well_known(self) -> well_known.AsyncWellKnownResourceWithStreamingResponse:
+        from .resources.well_known import AsyncWellKnownResourceWithStreamingResponse
+
+        return AsyncWellKnownResourceWithStreamingResponse(self._client.well_known)
+
+    @cached_property
+    def oauth(self) -> oauth.AsyncOAuthResourceWithStreamingResponse:
+        from .resources.oauth import AsyncOAuthResourceWithStreamingResponse
+
+        return AsyncOAuthResourceWithStreamingResponse(self._client.oauth)
 
 
 Client = Axiora

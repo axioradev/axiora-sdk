@@ -9,6 +9,7 @@ import pytest
 
 from axiora import Axiora, AsyncAxiora
 from tests.utils import assert_matches_type
+from axiora.types import WaitlistJoinResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +23,7 @@ class TestWaitlist:
         waitlist = client.waitlist.join(
             tier="tier",
         )
-        assert_matches_type(object, waitlist, path=["response"])
+        assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -35,7 +36,7 @@ class TestWaitlist:
             name="name",
             source="source",
         )
-        assert_matches_type(object, waitlist, path=["response"])
+        assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -47,7 +48,7 @@ class TestWaitlist:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         waitlist = response.parse()
-        assert_matches_type(object, waitlist, path=["response"])
+        assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -59,7 +60,7 @@ class TestWaitlist:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             waitlist = response.parse()
-            assert_matches_type(object, waitlist, path=["response"])
+            assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -75,7 +76,7 @@ class TestAsyncWaitlist:
         waitlist = await async_client.waitlist.join(
             tier="tier",
         )
-        assert_matches_type(object, waitlist, path=["response"])
+        assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -88,7 +89,7 @@ class TestAsyncWaitlist:
             name="name",
             source="source",
         )
-        assert_matches_type(object, waitlist, path=["response"])
+        assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -100,7 +101,7 @@ class TestAsyncWaitlist:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         waitlist = await response.parse()
-        assert_matches_type(object, waitlist, path=["response"])
+        assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -112,6 +113,6 @@ class TestAsyncWaitlist:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             waitlist = await response.parse()
-            assert_matches_type(object, waitlist, path=["response"])
+            assert_matches_type(WaitlistJoinResponse, waitlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
