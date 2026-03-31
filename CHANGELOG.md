@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.6.0 (2026-03-27)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/axioradev/axiora-sdk/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([7e1133e](https://github.com/axioradev/axiora-sdk/commit/7e1133ebffba77a7748150c8fa216bd405f801b4))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([5431e43](https://github.com/axioradev/axiora-sdk/commit/5431e43887cc36ae681299d8a1ca061f21a1a1ef))
+* **pydantic:** do not pass `by_alias` unless set ([00361df](https://github.com/axioradev/axiora-sdk/commit/00361df4d3bf01affd8644882edab79f626bddb4))
+* sanitize endpoint path params ([8cb29f7](https://github.com/axioradev/axiora-sdk/commit/8cb29f7dc5d40f630245c10d49099a1af9cdaa3f))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([a6e3968](https://github.com/axioradev/axiora-sdk/commit/a6e3968eb64fca555b4f27a5470a68eb21787a5e))
+* **ci:** skip uploading artifacts on stainless-internal branches ([cd61b0e](https://github.com/axioradev/axiora-sdk/commit/cd61b0e5d792c140aeaea78d09c66ceb8926c3a3))
+* **internal:** refactor authentication internals ([e2069e2](https://github.com/axioradev/axiora-sdk/commit/e2069e263b8fb9b738dcfda660c4e292fc8f79aa))
+* **internal:** tweak CI branches ([7c5d3c1](https://github.com/axioradev/axiora-sdk/commit/7c5d3c1106d9768e9caca1acea8f040a3f02f19a))
+* **internal:** update gitignore ([ca5cd8c](https://github.com/axioradev/axiora-sdk/commit/ca5cd8c240c1c84b846eab16a134e1b7f43f50cb))
+
 ## 0.5.0 (2026-03-03)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/axioradev/axiora-sdk/compare/v0.4.0...v0.5.0)
