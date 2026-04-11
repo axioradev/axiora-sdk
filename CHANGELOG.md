@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.1 (2026-04-11)
+
+Full Changelog: [v0.8.0...v0.8.1](https://github.com/axioradev/axiora-sdk/compare/v0.8.0...v0.8.1)
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([12bceb9](https://github.com/axioradev/axiora-sdk/commit/12bceb9f72be0fe19a9c6c441b158efe1bf9265b))
+* ensure file data are only sent as 1 parameter ([dbbdbda](https://github.com/axioradev/axiora-sdk/commit/dbbdbda4ad6feaf8aba6803152738cbfdbffa43b))
+
 ## 0.8.0 (2026-03-31)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/axioradev/axiora-sdk/compare/v0.7.0...v0.8.0)
