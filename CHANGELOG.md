@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.2 (2026-04-12)
+
+Full Changelog: [v0.8.1...v0.8.2](https://github.com/axioradev/axiora-sdk/compare/v0.8.1...v0.8.2)
+
+### Chores
+
+* regenerate openapi.json — add earnings, investors, watchlist, ownership chart endpoints ([d03f181](https://github.com/axioradev/axiora-sdk/commit/d03f181489ae588b7a1f24a14bd912f66d55972d))
+
 ## 0.8.1 (2026-04-11)
 
 Full Changelog: [v0.8.0...v0.8.1](https://github.com/axioradev/axiora-sdk/compare/v0.8.0...v0.8.1)
