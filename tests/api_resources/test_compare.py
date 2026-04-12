@@ -31,6 +31,7 @@ class TestCompare:
         compare = client.compare.retrieve(
             codes="codes",
             fiscal_year=0,
+            years=1,
         )
         assert_matches_type(CompareRetrieveResponse, compare, path=["response"])
 
@@ -80,6 +81,7 @@ class TestAsyncCompare:
         compare = await async_client.compare.retrieve(
             codes="codes",
             fiscal_year=0,
+            years=1,
         )
         assert_matches_type(CompareRetrieveResponse, compare, path=["response"])
 

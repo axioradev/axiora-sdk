@@ -13,6 +13,8 @@ class Data(BaseModel):
 
     company_name: Optional[str] = None
 
+    company_name_en: Optional[str] = None
+
     filing_date: Optional[str] = None
 
     fiscal_year_end: Optional[str] = None

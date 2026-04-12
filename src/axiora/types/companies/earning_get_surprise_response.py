@@ -27,6 +27,8 @@ class Data(BaseModel):
 
     company_name: Optional[str] = None
 
+    company_name_en: Optional[str] = None
+
     comprehensive_income: Optional[int] = None
 
     diluted_eps: Optional[float] = None

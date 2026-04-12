@@ -492,6 +492,7 @@ class CompaniesResource(SyncAPIResource):
         *,
         doc_type: str | Omit = omit,
         fields: Optional[str] | Omit = omit,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -507,6 +508,9 @@ class CompaniesResource(SyncAPIResource):
           doc_type: Filing type: 120 (annual), 130 (semi-annual), 140 (quarterly)
 
           fields: Comma-separated field names
+
+          split_adjusted: Adjust per-share values (EPS, BPS, DPS) for detected stock splits so the
+              time-series is comparable. Set to false for raw unadjusted values.
 
           years: Number of fiscal years
 
@@ -531,6 +535,7 @@ class CompaniesResource(SyncAPIResource):
                     {
                         "doc_type": doc_type,
                         "fields": fields,
+                        "split_adjusted": split_adjusted,
                         "years": years,
                     },
                     company_retrieve_financials_params.CompanyRetrieveFinancialsParams,
@@ -1262,6 +1267,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         *,
         doc_type: str | Omit = omit,
         fields: Optional[str] | Omit = omit,
+        split_adjusted: bool | Omit = omit,
         years: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1277,6 +1283,9 @@ class AsyncCompaniesResource(AsyncAPIResource):
           doc_type: Filing type: 120 (annual), 130 (semi-annual), 140 (quarterly)
 
           fields: Comma-separated field names
+
+          split_adjusted: Adjust per-share values (EPS, BPS, DPS) for detected stock splits so the
+              time-series is comparable. Set to false for raw unadjusted values.
 
           years: Number of fiscal years
 
@@ -1301,6 +1310,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
                     {
                         "doc_type": doc_type,
                         "fields": fields,
+                        "split_adjusted": split_adjusted,
                         "years": years,
                     },
                     company_retrieve_financials_params.CompanyRetrieveFinancialsParams,
