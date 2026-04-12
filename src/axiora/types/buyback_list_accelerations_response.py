@@ -21,20 +21,26 @@ class Data(BaseModel):
     current_completion_pct: Optional[float] = None
     """Current period completion %"""
 
-    name: Optional[str] = None
-    """Company name"""
+    name_en: Optional[str] = None
+    """Company name (English)"""
 
-    period_end: Optional[str] = None
-    """Reporting period end (ISO date)"""
+    name_jp: Optional[str] = None
+    """Company name (Japanese)"""
 
     prev_completion_pct: Optional[float] = None
     """Previous period completion %"""
+
+    reporting_period_end: Optional[str] = None
+    """Reporting period end (ISO date)"""
 
     resolution_type: Optional[str] = None
     """Resolution type"""
 
     sector: Optional[str] = None
     """Sector"""
+
+    securities_code: Optional[str] = None
+    """Securities code (4-digit)"""
 
 
 class BuybackListAccelerationsResponse(BaseModel):

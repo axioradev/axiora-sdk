@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 
 from .meta import Meta
 from .._models import BaseModel
@@ -14,6 +14,9 @@ class Data(BaseModel):
 
     sector: str
     """TSE 33-sector name in Japanese."""
+
+    sector_en: Optional[str] = None
+    """TSE 33-sector name in English."""
 
 
 class SectorListResponse(BaseModel):

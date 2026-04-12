@@ -13,3 +13,6 @@ class CompareRetrieveParams(TypedDict, total=False):
     """Comma-separated EDINET or securities codes (max 10)"""
 
     fiscal_year: Optional[int]
+
+    years: int
+    """Number of fiscal years to include"""
