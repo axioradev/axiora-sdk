@@ -15,5 +15,11 @@ class CompanyRetrieveFinancialsParams(TypedDict, total=False):
     fields: Optional[str]
     """Comma-separated field names"""
 
+    split_adjusted: bool
+    """
+    Adjust per-share values (EPS, BPS, DPS) for detected stock splits so the
+    time-series is comparable. Set to false for raw unadjusted values.
+    """
+
     years: int
     """Number of fiscal years"""

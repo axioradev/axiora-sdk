@@ -397,6 +397,7 @@ class TestCompanies:
             code="code",
             doc_type="doc_type",
             fields="fields",
+            split_adjusted=True,
             years=1,
         )
         assert_matches_type(ListResponseFinancial, company, path=["response"])
@@ -1139,6 +1140,7 @@ class TestAsyncCompanies:
             code="code",
             doc_type="doc_type",
             fields="fields",
+            split_adjusted=True,
             years=1,
         )
         assert_matches_type(ListResponseFinancial, company, path=["response"])
