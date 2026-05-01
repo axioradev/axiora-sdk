@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.0 (2026-05-01)
+
+Full Changelog: [v0.8.2...v0.9.0](https://github.com/axioradev/axiora-sdk/compare/v0.8.2...v0.9.0)
+
+### Features
+
+* support setting headers via env ([472629b](https://github.com/axioradev/axiora-sdk/commit/472629b19a45f76191746c9d0b499c33ddd8c6d2))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([10667a8](https://github.com/axioradev/axiora-sdk/commit/10667a8b3f19cf456d8ebfb0b6c79b2bcaf026e9))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([c9abccd](https://github.com/axioradev/axiora-sdk/commit/c9abccd83e7e8fcc72e585f24de613c3fd6cef52))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([0dee67b](https://github.com/axioradev/axiora-sdk/commit/0dee67b2852c6174305f3e4bdb6fbecaeaeec783))
+* **internal:** reformat pyproject.toml ([504892c](https://github.com/axioradev/axiora-sdk/commit/504892cfd0926bd9f93e2449a83cd9372a8bb014))
+
 ## 0.8.2 (2026-04-12)
 
 Full Changelog: [v0.8.1...v0.8.2](https://github.com/axioradev/axiora-sdk/compare/v0.8.1...v0.8.2)
