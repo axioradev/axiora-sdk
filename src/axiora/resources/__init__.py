@@ -112,6 +112,14 @@ from .earnings import (
     EarningsResourceWithStreamingResponse,
     AsyncEarningsResourceWithStreamingResponse,
 )
+from .ontology import (
+    OntologyResource,
+    AsyncOntologyResource,
+    OntologyResourceWithRawResponse,
+    AsyncOntologyResourceWithRawResponse,
+    OntologyResourceWithStreamingResponse,
+    AsyncOntologyResourceWithStreamingResponse,
+)
 from .rankings import (
     RankingsResource,
     AsyncRankingsResource,
@@ -324,6 +332,12 @@ __all__ = [
     "AsyncCoverageResourceWithRawResponse",
     "CoverageResourceWithStreamingResponse",
     "AsyncCoverageResourceWithStreamingResponse",
+    "OntologyResource",
+    "AsyncOntologyResource",
+    "OntologyResourceWithRawResponse",
+    "AsyncOntologyResourceWithRawResponse",
+    "OntologyResourceWithStreamingResponse",
+    "AsyncOntologyResourceWithStreamingResponse",
     "BatchResource",
     "AsyncBatchResource",
     "BatchResourceWithRawResponse",

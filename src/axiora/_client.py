@@ -52,6 +52,7 @@ if TYPE_CHECKING:
         buybacks,
         coverage,
         earnings,
+        ontology,
         rankings,
         sections,
         waitlist,
@@ -81,6 +82,7 @@ if TYPE_CHECKING:
     from .resources.buybacks import BuybacksResource, AsyncBuybacksResource
     from .resources.coverage import CoverageResource, AsyncCoverageResource
     from .resources.earnings import EarningsResource, AsyncEarningsResource
+    from .resources.ontology import OntologyResource, AsyncOntologyResource
     from .resources.rankings import RankingsResource, AsyncRankingsResource
     from .resources.sections import SectionsResource, AsyncSectionsResource
     from .resources.waitlist import WaitlistResource, AsyncWaitlistResource
@@ -250,6 +252,12 @@ class Axiora(SyncAPIClient):
         from .resources.coverage import CoverageResource
 
         return CoverageResource(self)
+
+    @cached_property
+    def ontology(self) -> OntologyResource:
+        from .resources.ontology import OntologyResource
+
+        return OntologyResource(self)
 
     @cached_property
     def batch(self) -> BatchResource:
@@ -615,6 +623,12 @@ class AsyncAxiora(AsyncAPIClient):
         return AsyncCoverageResource(self)
 
     @cached_property
+    def ontology(self) -> AsyncOntologyResource:
+        from .resources.ontology import AsyncOntologyResource
+
+        return AsyncOntologyResource(self)
+
+    @cached_property
     def batch(self) -> AsyncBatchResource:
         from .resources.batch import AsyncBatchResource
 
@@ -924,6 +938,12 @@ class AxioraWithRawResponse:
         return CoverageResourceWithRawResponse(self._client.coverage)
 
     @cached_property
+    def ontology(self) -> ontology.OntologyResourceWithRawResponse:
+        from .resources.ontology import OntologyResourceWithRawResponse
+
+        return OntologyResourceWithRawResponse(self._client.ontology)
+
+    @cached_property
     def batch(self) -> batch.BatchResourceWithRawResponse:
         from .resources.batch import BatchResourceWithRawResponse
 
@@ -1103,6 +1123,12 @@ class AsyncAxioraWithRawResponse:
         from .resources.coverage import AsyncCoverageResourceWithRawResponse
 
         return AsyncCoverageResourceWithRawResponse(self._client.coverage)
+
+    @cached_property
+    def ontology(self) -> ontology.AsyncOntologyResourceWithRawResponse:
+        from .resources.ontology import AsyncOntologyResourceWithRawResponse
+
+        return AsyncOntologyResourceWithRawResponse(self._client.ontology)
 
     @cached_property
     def batch(self) -> batch.AsyncBatchResourceWithRawResponse:
@@ -1286,6 +1312,12 @@ class AxioraWithStreamedResponse:
         return CoverageResourceWithStreamingResponse(self._client.coverage)
 
     @cached_property
+    def ontology(self) -> ontology.OntologyResourceWithStreamingResponse:
+        from .resources.ontology import OntologyResourceWithStreamingResponse
+
+        return OntologyResourceWithStreamingResponse(self._client.ontology)
+
+    @cached_property
     def batch(self) -> batch.BatchResourceWithStreamingResponse:
         from .resources.batch import BatchResourceWithStreamingResponse
 
@@ -1465,6 +1497,12 @@ class AsyncAxioraWithStreamedResponse:
         from .resources.coverage import AsyncCoverageResourceWithStreamingResponse
 
         return AsyncCoverageResourceWithStreamingResponse(self._client.coverage)
+
+    @cached_property
+    def ontology(self) -> ontology.AsyncOntologyResourceWithStreamingResponse:
+        from .resources.ontology import AsyncOntologyResourceWithStreamingResponse
+
+        return AsyncOntologyResourceWithStreamingResponse(self._client.ontology)
 
     @cached_property
     def batch(self) -> batch.AsyncBatchResourceWithStreamingResponse:

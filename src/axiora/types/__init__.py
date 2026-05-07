@@ -9,12 +9,14 @@ from .filing import Filing as Filing
 from .growth import Growth as Growth
 from .company import Company as Company
 from .financial import Financial as Financial
+from .subsidiary import Subsidiary as Subsidiary
 from .deleted_out import DeletedOut as DeletedOut
 from .translation import Translation as Translation
 from .board_member import BoardMember as BoardMember
 from .health_score import HealthScore as HealthScore
 from .key_response import KeyResponse as KeyResponse
 from .growth_metrics import GrowthMetrics as GrowthMetrics
+from .ontology_field import OntologyField as OntologyField
 from .key_create_params import KeyCreateParams as KeyCreateParams
 from .key_list_response import KeyListResponse as KeyListResponse
 from .capital_allocation import CapitalAllocation as CapitalAllocation
@@ -62,6 +64,7 @@ from .timesery_retrieve_response import TimeseryRetrieveResponse as TimeseryRetr
 from .earning_list_signals_params import EarningListSignalsParams as EarningListSignalsParams
 from .freshness_retrieve_response import FreshnessRetrieveResponse as FreshnessRetrieveResponse
 from .list_response_voting_result import ListResponseVotingResult as ListResponseVotingResult
+from .ontology_list_fields_params import OntologyListFieldsParams as OntologyListFieldsParams
 from .translation_search_response import TranslationSearchResponse as TranslationSearchResponse
 from .buyback_list_latest_response import BuybackListLatestResponse as BuybackListLatestResponse
 from .company_get_forecasts_params import CompanyGetForecastsParams as CompanyGetForecastsParams
@@ -70,6 +73,7 @@ from .sector_retrieve_stats_params import SectorRetrieveStatsParams as SectorRet
 from .batch_fetch_financials_params import BatchFetchFinancialsParams as BatchFetchFinancialsParams
 from .company_retrieve_peers_params import CompanyRetrievePeersParams as CompanyRetrievePeersParams
 from .earning_list_signals_response import EarningListSignalsResponse as EarningListSignalsResponse
+from .ontology_list_fields_response import OntologyListFieldsResponse as OntologyListFieldsResponse
 from .ownership_list_signals_params import OwnershipListSignalsParams as OwnershipListSignalsParams
 from .company_get_forecasts_response import CompanyGetForecastsResponse as CompanyGetForecastsResponse
 from .company_retrieve_growth_params import CompanyRetrieveGrowthParams as CompanyRetrieveGrowthParams
@@ -87,6 +91,9 @@ from .company_retrieve_health_response import CompanyRetrieveHealthResponse as C
 from .company_retrieve_ratios_response import CompanyRetrieveRatiosResponse as CompanyRetrieveRatiosResponse
 from .company_retrieve_sections_params import CompanyRetrieveSectionsParams as CompanyRetrieveSectionsParams
 from .earning_retrieve_latest_response import EarningRetrieveLatestResponse as EarningRetrieveLatestResponse
+from .ontology_retrieve_field_response import (
+    OntologyRetrieveFieldResponse as OntologyRetrieveFieldResponse,
+)
 from .bulk_export_financials_csv_params import BulkExportFinancialsCsvParams as BulkExportFinancialsCsvParams
 from .buyback_list_accelerations_params import BuybackListAccelerationsParams as BuybackListAccelerationsParams
 from .company_list_shareholdings_params import CompanyListShareholdingsParams as CompanyListShareholdingsParams
@@ -94,13 +101,22 @@ from .bulk_export_financials_json_params import BulkExportFinancialsJsonParams a
 from .company_list_voting_results_params import CompanyListVotingResultsParams as CompanyListVotingResultsParams
 from .company_retrieve_financials_params import CompanyRetrieveFinancialsParams as CompanyRetrieveFinancialsParams
 from .investor_retrieve_positions_params import InvestorRetrievePositionsParams as InvestorRetrievePositionsParams
+from .ontology_retrieve_version_response import (
+    OntologyRetrieveVersionResponse as OntologyRetrieveVersionResponse,
+)
 from .buyback_list_accelerations_response import BuybackListAccelerationsResponse as BuybackListAccelerationsResponse
 from .filing_retrieve_translations_params import FilingRetrieveTranslationsParams as FilingRetrieveTranslationsParams
 from .relationship_list_interlocks_params import RelationshipListInterlocksParams as RelationshipListInterlocksParams
 from .bulk_export_financials_json_response import BulkExportFinancialsJsonResponse as BulkExportFinancialsJsonResponse
 from .company_get_board_composition_params import CompanyGetBoardCompositionParams as CompanyGetBoardCompositionParams
+from .company_retrieve_subsidiaries_params import (
+    CompanyRetrieveSubsidiariesParams as CompanyRetrieveSubsidiariesParams,
+)
 from .investor_retrieve_positions_response import InvestorRetrievePositionsResponse as InvestorRetrievePositionsResponse
 from .ownership_list_cross_holdings_params import OwnershipListCrossHoldingsParams as OwnershipListCrossHoldingsParams
+from .shareholding_retrieve_audit_response import (
+    ShareholdingRetrieveAuditResponse as ShareholdingRetrieveAuditResponse,
+)
 from .company_retrieve_identifiers_response import (
     CompanyRetrieveIdentifiersResponse as CompanyRetrieveIdentifiersResponse,
 )
@@ -115,6 +131,9 @@ from .capital_allocation_list_ranking_params import (
 )
 from .company_get_board_composition_response import (
     CompanyGetBoardCompositionResponse as CompanyGetBoardCompositionResponse,
+)
+from .company_retrieve_subsidiaries_response import (
+    CompanyRetrieveSubsidiariesResponse as CompanyRetrieveSubsidiariesResponse,
 )
 from .ownership_list_cross_holdings_response import (
     OwnershipListCrossHoldingsResponse as OwnershipListCrossHoldingsResponse,
