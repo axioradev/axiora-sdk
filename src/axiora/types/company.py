@@ -21,6 +21,9 @@ class Company(BaseModel):
     updated_at: datetime
     """When this company record was last updated."""
 
+    entity_type: Optional[str] = None
+    """Entity classification: 'listed_company', 'fund', or 'unlisted_filer'."""
+
     fiscal_year_end: Optional[str] = None
     """Fiscal year-end month as 2-digit string (e.g. '03' for March)."""
 
@@ -35,6 +38,16 @@ class Company(BaseModel):
 
     sector: Optional[str] = None
     """TSE 33-sector classification in Japanese (e.g. '輸送用機器')."""
+
+    sector_display: Optional[str] = None
+    """Always-populated display label derived from sector + listing.
+
+    TSE's 33-sector classification only applies to listed equities; unlisted filers
+    (REITs, asset managers, foreign subs) carry no sector. This field surfaces that
+    gap explicitly: 'Unlisted' when listing is null, 'Uncategorised' when listed but
+    unclassified, otherwise the English sector name. Consumers needing the raw TSE
+    classification should still read `sector` / `sector_en`.
+    """
 
     sector_en: Optional[str] = None
     """TSE 33-sector in English. Auto-translated."""

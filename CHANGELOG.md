@@ -1,6 +1,25 @@
 # Changelog
 
-## 0.9.0 (2026-05-01)
+## 0.10.0 (2026-05-07)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/axioradev/axiora-sdk/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **Company**: add `sector_display` (always-populated label — `'Unlisted'` when listing is null, `'Uncategorised'` when listed but unclassified, otherwise the English sector name) and `entity_type` fields.
+* **Financial**: add derived ratios `roa`, `operating_margin`, `net_margin`, `gross_margin`, `equity_ratio` — computed in-band from raw inputs when not stored, never null when the inputs are present.
+* **Financial**: expose `accounting_standard` ('JP-GAAP' / 'IFRS' / 'US-GAAP'), `explanations` (per-field null reasons), and `sources` (XBRL provenance) on the response model.
+* **SectorListItem**: add `sector_display` matching the Company field.
+* **Meta**: add `computation_version`, `ontology_version`, and `data_as_of` fields for response provenance.
+* **Companies**: add `client.companies.retrieve_subsidiaries(code, limit=...)` — subsidiary registry from the parent's annual 関係会社 disclosure with bidirectional `cross_validation` outcomes (`bidirectional_match` / `voting_pct_mismatch` / `parent_only`).
+* **Shareholdings**: add `client.shareholdings.retrieve_audit(shareholding_id)` — per-row provenance bundle (source filing + real-time classification + retrospective label + classifier version stamp).
+* **Ontology** (new resource): `client.ontology.retrieve_version()`, `client.ontology.list_fields(category=...)`, `client.ontology.retrieve_field(field_name)` — queryable metadata for every field in the API, with per-accounting-standard mappings (JP-GAAP / IFRS / US-GAAP).
+* **Subsidiary** type docstrings now enumerate the possible values for `cross_validation` and `relationship_type` so SDK users see the contract inline.
+
+### Breaking Changes
+
+* **Financial.roe** now returns percentage units (e.g. `13.6` for 13.6%) across the entire dataset. Previously ~99.8% of stored values were raw fractions (`0.136`) inconsistent with the schema contract. The unit fix is enforced at the API; SDK consumers receive normalised values without code changes — but anyone who multiplied `roe * 100` for display must remove that step.
+
 
 Full Changelog: [v0.8.2...v0.9.0](https://github.com/axioradev/axiora-sdk/compare/v0.8.2...v0.9.0)
 
