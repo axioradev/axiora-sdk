@@ -52,6 +52,8 @@ from axiora.types import (
     CompanyRetrieveIdentifiersResponse,
     CompanyRetrievePeersResponse,
     CompanyRetrieveRatiosResponse,
+    CompanyRetrieveSubsidiariesResponse,
+    Subsidiary,
 )
 ```
 
@@ -70,6 +72,7 @@ Methods:
 - <code title="get /v1/companies/{code}/identifiers">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_identifiers</a>(code) -> <a href="./src/axiora/types/company_retrieve_identifiers_response.py">CompanyRetrieveIdentifiersResponse</a></code>
 - <code title="get /v1/companies/{code}/peers">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_peers</a>(code, \*\*<a href="src/axiora/types/company_retrieve_peers_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_peers_response.py">CompanyRetrievePeersResponse</a></code>
 - <code title="get /v1/companies/{code}/ratios">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_ratios</a>(code, \*\*<a href="src/axiora/types/company_retrieve_ratios_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_ratios_response.py">CompanyRetrieveRatiosResponse</a></code>
+- <code title="get /v1/companies/{code}/subsidiaries">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_subsidiaries</a>(code, \*\*<a href="src/axiora/types/company_retrieve_subsidiaries_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_subsidiaries_response.py">CompanyRetrieveSubsidiariesResponse</a></code>
 - <code title="get /v1/companies/{code}/sections">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_sections</a>(code, \*\*<a href="src/axiora/types/company_retrieve_sections_params.py">params</a>) -> <a href="./src/axiora/types/list_response_section.py">ListResponseSection</a></code>
 - <code title="get /v1/companies/search">client.companies.<a href="./src/axiora/resources/companies/companies.py">search</a>(\*\*<a href="src/axiora/types/company_search_params.py">params</a>) -> <a href="./src/axiora/types/list_response_company.py">ListResponseCompany</a></code>
 
@@ -364,9 +367,35 @@ Methods:
 
 # Shareholdings
 
+Types:
+
+```python
+from axiora.types import ShareholdingRetrieveAuditResponse
+```
+
 Methods:
 
 - <code title="get /v1/shareholdings/latest">client.shareholdings.<a href="./src/axiora/resources/shareholdings.py">list_latest</a>(\*\*<a href="src/axiora/types/shareholding_list_latest_params.py">params</a>) -> <a href="./src/axiora/types/list_response_shareholding.py">ListResponseShareholding</a></code>
+- <code title="get /v1/shareholdings/{shareholding_id}/audit">client.shareholdings.<a href="./src/axiora/resources/shareholdings.py">retrieve_audit</a>(shareholding_id) -> <a href="./src/axiora/types/shareholding_retrieve_audit_response.py">ShareholdingRetrieveAuditResponse</a></code>
+
+# Ontology
+
+Types:
+
+```python
+from axiora.types import (
+    OntologyField,
+    OntologyListFieldsResponse,
+    OntologyRetrieveFieldResponse,
+    OntologyRetrieveVersionResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/ontology/version">client.ontology.<a href="./src/axiora/resources/ontology.py">retrieve_version</a>() -> <a href="./src/axiora/types/ontology_retrieve_version_response.py">OntologyRetrieveVersionResponse</a></code>
+- <code title="get /v1/ontology/fields">client.ontology.<a href="./src/axiora/resources/ontology.py">list_fields</a>(\*\*<a href="src/axiora/types/ontology_list_fields_params.py">params</a>) -> <a href="./src/axiora/types/ontology_list_fields_response.py">OntologyListFieldsResponse</a></code>
+- <code title="get /v1/ontology/fields/{field_name}">client.ontology.<a href="./src/axiora/resources/ontology.py">retrieve_field</a>(field_name) -> <a href="./src/axiora/types/ontology_retrieve_field_response.py">OntologyRetrieveFieldResponse</a></code>
 
 # Ownership
 

@@ -1,364 +1,157 @@
-# Axiora Python API library
+# Axiora — Python SDK
 
-<!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/axiora.svg?label=pypi%20(stable))](https://pypi.org/project/axiora/)
+[![PyPI](https://img.shields.io/pypi/v/axiora.svg)](https://pypi.org/project/axiora/)
 
-The Axiora Python library provides convenient access to the Axiora REST API from any Python 3.9+
-application. The library includes type definitions for all request params and response fields,
-and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
+**Provable financial intelligence for Japanese equities.**
 
-It is generated with [Stainless](https://www.stainless.com/).
-
-## Documentation
-
-The REST API documentation can be found on [axiora.dev](https://axiora.dev/docs). The full API of this library can be found in [api.md](api.md).
-
-## Installation
+The Axiora SDK gives Python access to ~4,000 listed Japanese companies and ~9,000 unlisted EDINET filers — financials, ownership networks, audit-stamped per-row classifications, subsidiary cross-validation, and live activist signals. Every figure traces to its source filing.
 
 ```sh
-# install from PyPI
 pip install axiora
 ```
 
-## Usage
+## Get an API key
 
-The full API of this library can be found in [api.md](api.md).
-
-```python
-import os
-from axiora import Axiora
-
-client = Axiora(
-    api_key=os.environ.get("AXIORA_API_KEY"),  # This is the default and can be omitted
-)
-
-response = client.health.check()
-print(response.status)
-```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `AXIORA_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
-
-## Async usage
-
-Simply import `AsyncAxiora` instead of `Axiora` and use `await` with each API call:
-
-```python
-import os
-import asyncio
-from axiora import AsyncAxiora
-
-client = AsyncAxiora(
-    api_key=os.environ.get("AXIORA_API_KEY"),  # This is the default and can be omitted
-)
-
-
-async def main() -> None:
-    response = await client.health.check()
-    print(response.status)
-
-
-asyncio.run(main())
-```
-
-Functionality between the synchronous and asynchronous clients is otherwise identical.
-
-### With aiohttp
-
-By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
-
-You can enable this by installing `aiohttp`:
+Request access at [axiora.dev](https://axiora.dev). Set it as an environment variable:
 
 ```sh
-# install from PyPI
-pip install axiora[aiohttp]
+export AXIORA_API_KEY="ax_live_..."
 ```
 
-Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+## Quickstart
 
 ```python
-import os
+from axiora import Axiora
+
+client = Axiora()  # picks up AXIORA_API_KEY from env
+
+# Who holds Toyota — with the audit bundle institutional users actually need.
+rows = client.companies.list_shareholdings("7203", limit=10).data
+
+for r in rows:
+    print(
+        f"{r.holder_name:<40} {r.holding_ratio_pct:>6.2f}%  "
+        f"{r.holding_purpose_category:<22} "
+        f"conf={r.purpose_confidence:.2f}  validated={r.purpose_validated}  "
+        f"retro={r.purpose_retrospective_label}"
+    )
+```
+
+Every row carries:
+- `purpose_confidence` — calibrated probability of the at-filing classification
+- `purpose_validated` — passed cross-checks against the filer's history
+- `purpose_retrospective_label` — what later filings revealed (drift detection)
+- `purpose_classifier_version` — opaque hash, lets you replay analysis if the model is retrained
+
+## What you can do
+
+```python
+# Multi-year financials with derived ratios (ROA/ROE/margins computed in-band)
+client.companies.retrieve_financials("7203", years=5)
+
+# Growth — YoY rates per metric + 3y / 5y CAGR
+client.companies.retrieve_growth("7203")
+
+# Discovery: rank, screen, sector aggregates
+client.rankings.retrieve("net_income", limit=20)
+client.screen.retrieve(min_roe=15, min_revenue=100_000_000_000)
+client.sectors.list()
+
+# Earnings: actuals + management forecasts + market-wide surprise signals
+client.companies.earnings.list("5423")
+client.companies.get_forecasts("5423")
+client.earnings.list_signals(limit=20)
+
+# Governance: board composition + AGM voting outcomes
+client.companies.get_board_composition("7203")
+client.companies.list_voting_results("7036")
+
+# Ownership intelligence
+client.ownership.list_movers(days=90, limit=20)
+client.ownership.list_activist_campaigns(limit=20)
+client.companies.relationships.retrieve("7203")  # holders + holdings + interlocks + cross-holds
+client.companies.subsidiaries.retrieve("7203")   # parent–subsidiary cross-validation
+
+# Per-row provenance for any shareholding
+client.shareholdings.audit("312750")
+```
+
+Full method index: [api.md](api.md). REST docs: [axiora.dev/docs](https://axiora.dev/docs).
+
+## Async
+
+```python
 import asyncio
-from axiora import DefaultAioHttpClient
 from axiora import AsyncAxiora
 
-
-async def main() -> None:
-    async with AsyncAxiora(
-        api_key=os.environ.get("AXIORA_API_KEY"),  # This is the default and can be omitted
-        http_client=DefaultAioHttpClient(),
-    ) as client:
-        response = await client.health.check()
-        print(response.status)
-
+async def main():
+    async with AsyncAxiora() as client:
+        rows = (await client.companies.list_shareholdings("7203", limit=5)).data
+        for r in rows:
+            print(r.holder_name, r.holding_ratio_pct)
 
 asyncio.run(main())
 ```
 
-## Using types
+Functionality is identical to the sync client.
 
-Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
+## Translation note
 
-- Serializing back into JSON, `model.to_json()`
-- Converting to a dictionary, `model.to_dict()`
+English filer / company / sector / business-description fields are populated by best-effort translation today. We don't yet guarantee them — treat the Japanese fields (`name_jp`, `sector`, `address_jp`, `business_description_jp`) as the contract and use the English variants as hints. A fine-tuned frontier-model translation pipeline ships in May 2026; after rollout, English fields will carry per-field source / model version / confidence stamps.
 
-Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
-
-## Handling errors
-
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `axiora.APIConnectionError` is raised.
-
-When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `axiora.APIStatusError` is raised, containing `status_code` and `response` properties.
-
-All errors inherit from `axiora.APIError`.
+## Error handling
 
 ```python
-import axiora
-from axiora import Axiora
+from axiora import Axiora, APIStatusError, RateLimitError
 
 client = Axiora()
-
 try:
-    client.health.check()
-except axiora.APIConnectionError as e:
-    print("The server could not be reached")
-    print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except axiora.RateLimitError as e:
-    print("A 429 status code was received; we should back off a bit.")
-except axiora.APIStatusError as e:
-    print("Another non-200-range status code was received")
-    print(e.status_code)
-    print(e.response)
+    client.companies.retrieve("7203")
+except RateLimitError:
+    ...   # 429 — back off
+except APIStatusError as e:
+    print(e.status_code, e.response)
 ```
 
-Error codes are as follows:
+| Status | Error                       |
+|---|---|
+| 400 | `BadRequestError`             |
+| 401 | `AuthenticationError`         |
+| 403 | `PermissionDeniedError`       |
+| 404 | `NotFoundError`               |
+| 422 | `UnprocessableEntityError`    |
+| 429 | `RateLimitError`              |
+| 5xx | `InternalServerError`         |
+| —   | `APIConnectionError`          |
 
-| Status Code | Error Type                 |
-| ----------- | -------------------------- |
-| 400         | `BadRequestError`          |
-| 401         | `AuthenticationError`      |
-| 403         | `PermissionDeniedError`    |
-| 404         | `NotFoundError`            |
-| 422         | `UnprocessableEntityError` |
-| 429         | `RateLimitError`           |
-| >=500       | `InternalServerError`      |
-| N/A         | `APIConnectionError`       |
+## Configuration
 
-### Retries
-
-Certain errors are automatically retried 2 times by default, with a short exponential backoff.
-Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
-429 Rate Limit, and >=500 Internal errors are all retried by default.
-
-You can use the `max_retries` option to configure or disable retry settings:
+`max_retries` (default 2), `timeout` (default 60s), and `base_url` are configurable per-client and per-request:
 
 ```python
-from axiora import Axiora
-
-# Configure the default for all requests:
-client = Axiora(
-    # default is 2
-    max_retries=0,
-)
-
-# Or, configure per-request:
-client.with_options(max_retries=5).health.check()
+client = Axiora(max_retries=5, timeout=20.0)
+client.with_options(timeout=5.0).companies.retrieve("7203")
 ```
 
-### Timeouts
+For raw responses (headers etc.), prefix `with_raw_response`. For streaming, `with_streaming_response`. See the [Stainless conventions](https://www.stainless.com/docs/concepts/clients) for the full surface — every method supports both.
 
-By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
+## Requirements
 
-```python
-from axiora import Axiora
-
-# Configure the default for all requests:
-client = Axiora(
-    # 20 seconds (default is 1 minute)
-    timeout=20.0,
-)
-
-# More granular control:
-client = Axiora(
-    timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-)
-
-# Override per-request:
-client.with_options(timeout=5.0).health.check()
-```
-
-On timeout, an `APITimeoutError` is thrown.
-
-Note that requests that time out are [retried twice by default](#retries).
-
-## Advanced
-
-### Logging
-
-We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
-
-You can enable logging by setting the environment variable `AXIORA_LOG` to `info`.
-
-```shell
-$ export AXIORA_LOG=info
-```
-
-Or to `debug` for more verbose logging.
-
-### How to tell whether `None` means `null` or missing
-
-In an API response, a field may be explicitly `null`, or missing entirely; in either case, its value is `None` in this library. You can differentiate the two cases with `.model_fields_set`:
-
-```py
-if response.my_field is None:
-  if 'my_field' not in response.model_fields_set:
-    print('Got json like {}, without a "my_field" key present at all.')
-  else:
-    print('Got json like {"my_field": null}.')
-```
-
-### Accessing raw response data (e.g. headers)
-
-The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
-
-```py
-from axiora import Axiora
-
-client = Axiora()
-response = client.health.with_raw_response.check()
-print(response.headers.get('X-My-Header'))
-
-health = response.parse()  # get the object that `health.check()` would have returned
-print(health.status)
-```
-
-These methods return an [`APIResponse`](https://github.com/axioradev/axiora-sdk/tree/main/src/axiora/_response.py) object.
-
-The async client returns an [`AsyncAPIResponse`](https://github.com/axioradev/axiora-sdk/tree/main/src/axiora/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
-
-#### `.with_streaming_response`
-
-The above interface eagerly reads the full response body when you make the request, which may not always be what you want.
-
-To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
-
-```python
-with client.health.with_streaming_response.check() as response:
-    print(response.headers.get("X-My-Header"))
-
-    for line in response.iter_lines():
-        print(line)
-```
-
-The context manager is required so that the response will reliably be closed.
-
-### Making custom/undocumented requests
-
-This library is typed for convenient access to the documented API.
-
-If you need to access undocumented endpoints, params, or response properties, the library can still be used.
-
-#### Undocumented endpoints
-
-To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
-http verbs. Options on the client will be respected (such as retries) when making this request.
-
-```py
-import httpx
-
-response = client.post(
-    "/foo",
-    cast_to=httpx.Response,
-    body={"my_param": True},
-)
-
-print(response.headers.get("x-foo"))
-```
-
-#### Undocumented request params
-
-If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request
-options.
-
-#### Undocumented response properties
-
-To access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You
-can also get all the extra fields on the Pydantic model as a dict with
-[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).
-
-### Configuring the HTTP client
-
-You can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:
-
-- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)
-- Custom [transports](https://www.python-httpx.org/advanced/transports/)
-- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
-
-```python
-import httpx
-from axiora import Axiora, DefaultHttpxClient
-
-client = Axiora(
-    # Or use the `AXIORA_BASE_URL` env var
-    base_url="http://my.test.server.example.com:8083",
-    http_client=DefaultHttpxClient(
-        proxy="http://my.test.proxy.example.com",
-        transport=httpx.HTTPTransport(local_address="0.0.0.0"),
-    ),
-)
-```
-
-You can also customize the client on a per-request basis by using `with_options()`:
-
-```python
-client.with_options(http_client=DefaultHttpxClient(...))
-```
-
-### Managing HTTP resources
-
-By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
-
-```py
-from axiora import Axiora
-
-with Axiora() as client:
-  # make requests here
-  ...
-
-# HTTP client is now closed
-```
+Python 3.9+. The async client uses `httpx` by default; `pip install axiora[aiohttp]` to switch backends.
 
 ## Versioning
 
-This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
+[SemVer](https://semver.org). Breaking changes get noted in the [CHANGELOG](./CHANGELOG.md). Minor 0.x bumps may include backwards-incompatible static-type adjustments — if you pin runtime behaviour, pin the patch version.
 
-1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
-3. Changes that we do not expect to impact the vast majority of users in practice.
-
-We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
-
-We are keen for your feedback; please open an [issue](https://www.github.com/axioradev/axiora-sdk/issues) with questions, bugs, or suggestions.
-
-### Determining the installed version
-
-If you've upgraded to the latest version but aren't seeing any new features you were expecting then your python environment is likely still using an older version.
-
-You can determine the version that is being used at runtime with:
-
-```py
+```python
 import axiora
 print(axiora.__version__)
 ```
 
-## Requirements
-
-Python 3.9 or higher.
-
 ## Contributing
 
-See [the contributing documentation](./CONTRIBUTING.md).
+See [CONTRIBUTING.md](./CONTRIBUTING.md). The SDK is generated by [Stainless](https://www.stainless.com/) from our OpenAPI spec — substantive changes ship via spec updates, not direct edits to generated files.
+
+## License
+
+Apache 2.0. See [LICENSE](./LICENSE).
