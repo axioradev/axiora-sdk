@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 from datetime import date
 
 from .._models import BaseModel
@@ -17,6 +17,12 @@ class Financial(BaseModel):
 
     period_end: date
     """Last day of the fiscal period (e.g. '2024-03-31')."""
+
+    accounting_standard: Optional[str] = None
+    """Accounting standard: 'JP-GAAP', 'IFRS', or 'US-GAAP'.
+
+    Null when not resolved from filing metadata.
+    """
 
     bps: Optional[float] = None
     """Book value per share in JPY."""
@@ -63,6 +69,21 @@ class Financial(BaseModel):
     eps: Optional[float] = None
     """Basic EPS in JPY (e.g. 285.23)."""
 
+    equity_ratio: Optional[float] = None
+    """Equity ratio (%).
+
+    total_equity ÷ total_assets × 100.
+    """
+
+    explanations: Optional[Dict[str, str]] = None
+    """Explanations for null financial fields.
+
+    Keys are field names, values explain why the field is null (e.g. accounting
+    standard differences, data availability). Only present when
+    include=explanations is requested (REST API) or always included in MCP tool
+    responses.
+    """
+
     extraordinary_income: Optional[int] = None
     """Extraordinary income (特別利益) in JPY. JP-GAAP only."""
 
@@ -74,6 +95,12 @@ class Financial(BaseModel):
 
     goodwill: Optional[int] = None
     """Goodwill (のれん) in JPY. IFRS: separate line; JP-GAAP: in intangibles."""
+
+    gross_margin: Optional[float] = None
+    """Gross margin (%).
+
+    gross_profit ÷ revenue × 100.
+    """
 
     gross_profit: Optional[int] = None
     """Gross profit (売上総利益) in JPY. Revenue minus cost of sales."""
@@ -123,6 +150,12 @@ class Financial(BaseModel):
     net_income: Optional[int] = None
     """Net income attributable to owners of the parent in JPY. Null if not reported."""
 
+    net_margin: Optional[float] = None
+    """Net margin (%).
+
+    net_income ÷ revenue × 100.
+    """
+
     non_controlling_interests: Optional[int] = None
     """Non-controlling interests (非支配株主持分) in JPY."""
 
@@ -140,6 +173,12 @@ class Financial(BaseModel):
 
     operating_income: Optional[int] = None
     """Operating income (営業利益) in JPY."""
+
+    operating_margin: Optional[float] = None
+    """Operating margin (%).
+
+    operating_income ÷ revenue × 100.
+    """
 
     ordinary_income: Optional[int] = None
     """Ordinary income (経常利益) in JPY. JP-GAAP only; includes non-operating items."""
@@ -162,6 +201,12 @@ class Financial(BaseModel):
     rnd_expenses: Optional[int] = None
     """R&D expenses (研究開発費) in JPY."""
 
+    roa: Optional[float] = None
+    """Return on assets (%).
+
+    net_income ÷ total_assets × 100.
+    """
+
     roe: Optional[float] = None
     """Return on equity (%). E.g. 12.5 means 12.5%."""
 
@@ -176,6 +221,13 @@ class Financial(BaseModel):
 
     source_doc_id: Optional[str] = None
     """EDINET document ID of the source filing (e.g. 'S100ABCD')."""
+
+    sources: Optional[Dict[str, object]] = None
+    """Per-field source citations tracing each value to its EDINET filing.
+
+    Only present when include=sources is requested. Contains 'edinet_url',
+    'accounting_standard', and period dates.
+    """
 
     total_assets: Optional[int] = None
     """Total assets (総資産) in JPY."""

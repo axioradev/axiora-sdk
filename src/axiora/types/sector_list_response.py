@@ -15,6 +15,13 @@ class Data(BaseModel):
     sector: str
     """TSE 33-sector name in Japanese."""
 
+    sector_display: Optional[str] = None
+    """Always-populated display label.
+
+    sector_en when available; 'Unlisted' when the entity has no TSE listing;
+    'Uncategorised' otherwise.
+    """
+
     sector_en: Optional[str] = None
     """TSE 33-sector name in English."""
 
