@@ -20,6 +20,7 @@ from ...types import (
     company_list_voting_results_params,
     company_retrieve_financials_params,
     company_get_board_composition_params,
+    company_retrieve_subsidiaries_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -77,6 +78,7 @@ from ...types.company_retrieve_health_response import CompanyRetrieveHealthRespo
 from ...types.company_retrieve_ratios_response import CompanyRetrieveRatiosResponse
 from ...types.company_retrieve_identifiers_response import CompanyRetrieveIdentifiersResponse
 from ...types.company_get_board_composition_response import CompanyGetBoardCompositionResponse
+from ...types.company_retrieve_subsidiaries_response import CompanyRetrieveSubsidiariesResponse
 from ...types.company_get_capital_allocation_response import CompanyGetCapitalAllocationResponse
 
 __all__ = ["CompaniesResource", "AsyncCompaniesResource"]
@@ -749,6 +751,54 @@ class CompaniesResource(SyncAPIResource):
                 ),
             ),
             cast_to=CompanyRetrieveRatiosResponse,
+        )
+
+    def retrieve_subsidiaries(
+        self,
+        code: str,
+        *,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyRetrieveSubsidiariesResponse:
+        """Subsidiary registry from a parent's annual 関係会社 disclosure.
+
+        Each row carries the disclosure verbatim plus derived attributes
+        (country, currency) and a `cross_validation` outcome — when the
+        subsidiary itself files separately, we join its own annual disclosure
+        and surface 'bidirectional_match' / 'voting_pct_mismatch' /
+        'parent_only'.
+
+        Args:
+          limit: Max number of subsidiaries to return.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return self._get(
+            path_template("/v1/companies/{code}/subsidiaries", code=code),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"limit": limit},
+                    company_retrieve_subsidiaries_params.CompanyRetrieveSubsidiariesParams,
+                ),
+            ),
+            cast_to=CompanyRetrieveSubsidiariesResponse,
         )
 
     def retrieve_sections(
@@ -1528,6 +1578,54 @@ class AsyncCompaniesResource(AsyncAPIResource):
             cast_to=CompanyRetrieveRatiosResponse,
         )
 
+    async def retrieve_subsidiaries(
+        self,
+        code: str,
+        *,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyRetrieveSubsidiariesResponse:
+        """Subsidiary registry from a parent's annual 関係会社 disclosure.
+
+        Each row carries the disclosure verbatim plus derived attributes
+        (country, currency) and a `cross_validation` outcome — when the
+        subsidiary itself files separately, we join its own annual disclosure
+        and surface 'bidirectional_match' / 'voting_pct_mismatch' /
+        'parent_only'.
+
+        Args:
+          limit: Max number of subsidiaries to return.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return await self._get(
+            path_template("/v1/companies/{code}/subsidiaries", code=code),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"limit": limit},
+                    company_retrieve_subsidiaries_params.CompanyRetrieveSubsidiariesParams,
+                ),
+            ),
+            cast_to=CompanyRetrieveSubsidiariesResponse,
+        )
+
     async def retrieve_sections(
         self,
         code: str,
@@ -1675,6 +1773,9 @@ class CompaniesResourceWithRawResponse:
         self.retrieve_ratios = to_raw_response_wrapper(
             companies.retrieve_ratios,
         )
+        self.retrieve_subsidiaries = to_raw_response_wrapper(
+            companies.retrieve_subsidiaries,
+        )
         self.retrieve_sections = to_raw_response_wrapper(
             companies.retrieve_sections,
         )
@@ -1741,6 +1842,9 @@ class AsyncCompaniesResourceWithRawResponse:
         )
         self.retrieve_ratios = async_to_raw_response_wrapper(
             companies.retrieve_ratios,
+        )
+        self.retrieve_subsidiaries = async_to_raw_response_wrapper(
+            companies.retrieve_subsidiaries,
         )
         self.retrieve_sections = async_to_raw_response_wrapper(
             companies.retrieve_sections,
@@ -1809,6 +1913,9 @@ class CompaniesResourceWithStreamingResponse:
         self.retrieve_ratios = to_streamed_response_wrapper(
             companies.retrieve_ratios,
         )
+        self.retrieve_subsidiaries = to_streamed_response_wrapper(
+            companies.retrieve_subsidiaries,
+        )
         self.retrieve_sections = to_streamed_response_wrapper(
             companies.retrieve_sections,
         )
@@ -1875,6 +1982,9 @@ class AsyncCompaniesResourceWithStreamingResponse:
         )
         self.retrieve_ratios = async_to_streamed_response_wrapper(
             companies.retrieve_ratios,
+        )
+        self.retrieve_subsidiaries = async_to_streamed_response_wrapper(
+            companies.retrieve_subsidiaries,
         )
         self.retrieve_sections = async_to_streamed_response_wrapper(
             companies.retrieve_sections,

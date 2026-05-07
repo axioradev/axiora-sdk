@@ -9,7 +9,7 @@ import pytest
 
 from axiora import Axiora, AsyncAxiora
 from tests.utils import assert_matches_type
-from axiora.types import ListResponseShareholding
+from axiora.types import ListResponseShareholding, ShareholdingRetrieveAuditResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -55,6 +55,40 @@ class TestShareholdings:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve_audit(self, client: Axiora) -> None:
+        shareholding = client.shareholdings.retrieve_audit(
+            shareholding_id=0,
+        )
+        assert_matches_type(ShareholdingRetrieveAuditResponse, shareholding, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_audit(self, client: Axiora) -> None:
+        response = client.shareholdings.with_raw_response.retrieve_audit(
+            shareholding_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        shareholding = response.parse()
+        assert_matches_type(ShareholdingRetrieveAuditResponse, shareholding, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_audit(self, client: Axiora) -> None:
+        with client.shareholdings.with_streaming_response.retrieve_audit(
+            shareholding_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            shareholding = response.parse()
+            assert_matches_type(ShareholdingRetrieveAuditResponse, shareholding, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncShareholdings:
     parametrize = pytest.mark.parametrize(
@@ -96,5 +130,39 @@ class TestAsyncShareholdings:
 
             shareholding = await response.parse()
             assert_matches_type(ListResponseShareholding, shareholding, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_audit(self, async_client: AsyncAxiora) -> None:
+        shareholding = await async_client.shareholdings.retrieve_audit(
+            shareholding_id=0,
+        )
+        assert_matches_type(ShareholdingRetrieveAuditResponse, shareholding, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_audit(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.shareholdings.with_raw_response.retrieve_audit(
+            shareholding_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        shareholding = await response.parse()
+        assert_matches_type(ShareholdingRetrieveAuditResponse, shareholding, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_audit(self, async_client: AsyncAxiora) -> None:
+        async with async_client.shareholdings.with_streaming_response.retrieve_audit(
+            shareholding_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            shareholding = await response.parse()
+            assert_matches_type(ShareholdingRetrieveAuditResponse, shareholding, path=["response"])
 
         assert cast(Any, response.is_closed) is True
