@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.12.1 (2026-06-18)
+
+Full Changelog: [v0.12.0...v0.12.1](https://github.com/axioradev/axiora-sdk/compare/v0.12.0...v0.12.1)
+
+### Bug Fixes
+
+* **auth:** prioritize first auth header ([4d29a56](https://github.com/axioradev/axiora-sdk/commit/4d29a56f1c3945d3515847e903fb9313cbbc4082))
+
 ## 0.12.0 (2026-05-13)
 
 Full Changelog: [v0.11.1...v0.12.0](https://github.com/axioradev/axiora-sdk/compare/v0.11.1...v0.12.0)
