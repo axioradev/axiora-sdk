@@ -38,6 +38,7 @@ from ._base_client import (
 
 if TYPE_CHECKING:
     from .resources import (
+        v2,
         bulk,
         keys,
         batch,
@@ -64,11 +65,13 @@ if TYPE_CHECKING:
         watchlist,
         timeseries,
         well_known,
+        identifiers,
         translations,
         relationships,
         shareholdings,
         capital_allocation,
     )
+    from .resources.v2 import V2Resource, AsyncV2Resource
     from .resources.bulk import BulkResource, AsyncBulkResource
     from .resources.keys import KeysResource, AsyncKeysResource
     from .resources.batch import BatchResource, AsyncBatchResource
@@ -92,6 +95,7 @@ if TYPE_CHECKING:
     from .resources.ownership import OwnershipResource, AsyncOwnershipResource
     from .resources.watchlist import WatchlistResource, AsyncWatchlistResource
     from .resources.timeseries import TimeseriesResource, AsyncTimeseriesResource
+    from .resources.identifiers import IdentifiersResource, AsyncIdentifiersResource
     from .resources.oauth.oauth import OAuthResource, AsyncOAuthResource
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
     from .resources.relationships import RelationshipsResource, AsyncRelationshipsResource
@@ -342,6 +346,18 @@ class Axiora(SyncAPIClient):
         from .resources.oauth import OAuthResource
 
         return OAuthResource(self)
+
+    @cached_property
+    def identifiers(self) -> IdentifiersResource:
+        from .resources.identifiers import IdentifiersResource
+
+        return IdentifiersResource(self)
+
+    @cached_property
+    def v2(self) -> V2Resource:
+        from .resources.v2 import V2Resource
+
+        return V2Resource(self)
 
     @cached_property
     def with_raw_response(self) -> AxioraWithRawResponse:
@@ -713,6 +729,18 @@ class AsyncAxiora(AsyncAPIClient):
         return AsyncOAuthResource(self)
 
     @cached_property
+    def identifiers(self) -> AsyncIdentifiersResource:
+        from .resources.identifiers import AsyncIdentifiersResource
+
+        return AsyncIdentifiersResource(self)
+
+    @cached_property
+    def v2(self) -> AsyncV2Resource:
+        from .resources.v2 import AsyncV2Resource
+
+        return AsyncV2Resource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncAxioraWithRawResponse:
         return AsyncAxioraWithRawResponse(self)
 
@@ -1027,6 +1055,18 @@ class AxioraWithRawResponse:
 
         return OAuthResourceWithRawResponse(self._client.oauth)
 
+    @cached_property
+    def identifiers(self) -> identifiers.IdentifiersResourceWithRawResponse:
+        from .resources.identifiers import IdentifiersResourceWithRawResponse
+
+        return IdentifiersResourceWithRawResponse(self._client.identifiers)
+
+    @cached_property
+    def v2(self) -> v2.V2ResourceWithRawResponse:
+        from .resources.v2 import V2ResourceWithRawResponse
+
+        return V2ResourceWithRawResponse(self._client.v2)
+
 
 class AsyncAxioraWithRawResponse:
     _client: AsyncAxiora
@@ -1213,6 +1253,18 @@ class AsyncAxioraWithRawResponse:
         from .resources.oauth import AsyncOAuthResourceWithRawResponse
 
         return AsyncOAuthResourceWithRawResponse(self._client.oauth)
+
+    @cached_property
+    def identifiers(self) -> identifiers.AsyncIdentifiersResourceWithRawResponse:
+        from .resources.identifiers import AsyncIdentifiersResourceWithRawResponse
+
+        return AsyncIdentifiersResourceWithRawResponse(self._client.identifiers)
+
+    @cached_property
+    def v2(self) -> v2.AsyncV2ResourceWithRawResponse:
+        from .resources.v2 import AsyncV2ResourceWithRawResponse
+
+        return AsyncV2ResourceWithRawResponse(self._client.v2)
 
 
 class AxioraWithStreamedResponse:
@@ -1401,6 +1453,18 @@ class AxioraWithStreamedResponse:
 
         return OAuthResourceWithStreamingResponse(self._client.oauth)
 
+    @cached_property
+    def identifiers(self) -> identifiers.IdentifiersResourceWithStreamingResponse:
+        from .resources.identifiers import IdentifiersResourceWithStreamingResponse
+
+        return IdentifiersResourceWithStreamingResponse(self._client.identifiers)
+
+    @cached_property
+    def v2(self) -> v2.V2ResourceWithStreamingResponse:
+        from .resources.v2 import V2ResourceWithStreamingResponse
+
+        return V2ResourceWithStreamingResponse(self._client.v2)
+
 
 class AsyncAxioraWithStreamedResponse:
     _client: AsyncAxiora
@@ -1587,6 +1651,18 @@ class AsyncAxioraWithStreamedResponse:
         from .resources.oauth import AsyncOAuthResourceWithStreamingResponse
 
         return AsyncOAuthResourceWithStreamingResponse(self._client.oauth)
+
+    @cached_property
+    def identifiers(self) -> identifiers.AsyncIdentifiersResourceWithStreamingResponse:
+        from .resources.identifiers import AsyncIdentifiersResourceWithStreamingResponse
+
+        return AsyncIdentifiersResourceWithStreamingResponse(self._client.identifiers)
+
+    @cached_property
+    def v2(self) -> v2.AsyncV2ResourceWithStreamingResponse:
+        from .resources.v2 import AsyncV2ResourceWithStreamingResponse
+
+        return AsyncV2ResourceWithStreamingResponse(self._client.v2)
 
 
 Client = Axiora

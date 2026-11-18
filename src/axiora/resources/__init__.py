@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .v2 import (
+    V2Resource,
+    AsyncV2Resource,
+    V2ResourceWithRawResponse,
+    AsyncV2ResourceWithRawResponse,
+    V2ResourceWithStreamingResponse,
+    AsyncV2ResourceWithStreamingResponse,
+)
 from .bulk import (
     BulkResource,
     AsyncBulkResource,
@@ -207,6 +215,14 @@ from .well_known import (
     AsyncWellKnownResourceWithRawResponse,
     WellKnownResourceWithStreamingResponse,
     AsyncWellKnownResourceWithStreamingResponse,
+)
+from .identifiers import (
+    IdentifiersResource,
+    AsyncIdentifiersResource,
+    IdentifiersResourceWithRawResponse,
+    AsyncIdentifiersResourceWithRawResponse,
+    IdentifiersResourceWithStreamingResponse,
+    AsyncIdentifiersResourceWithStreamingResponse,
 )
 from .translations import (
     TranslationsResource,
@@ -422,4 +438,16 @@ __all__ = [
     "AsyncOAuthResourceWithRawResponse",
     "OAuthResourceWithStreamingResponse",
     "AsyncOAuthResourceWithStreamingResponse",
+    "IdentifiersResource",
+    "AsyncIdentifiersResource",
+    "IdentifiersResourceWithRawResponse",
+    "AsyncIdentifiersResourceWithRawResponse",
+    "IdentifiersResourceWithStreamingResponse",
+    "AsyncIdentifiersResourceWithStreamingResponse",
+    "V2Resource",
+    "AsyncV2Resource",
+    "V2ResourceWithRawResponse",
+    "AsyncV2ResourceWithRawResponse",
+    "V2ResourceWithStreamingResponse",
+    "AsyncV2ResourceWithStreamingResponse",
 ]

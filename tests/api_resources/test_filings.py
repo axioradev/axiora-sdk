@@ -14,6 +14,8 @@ from axiora.types import (
     ListResponseSection,
     FilingCalendarResponse,
     FilingRetrieveResponse,
+    FilingInternalControlResponse,
+    FilingFundRegistrationResponse,
     FilingRetrieveTranslationsResponse,
 )
 from axiora._utils import parse_date, parse_datetime
@@ -245,6 +247,90 @@ class TestFilings:
                 doc_id="",
             )
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_fund_registration(self, client: Axiora) -> None:
+        filing = client.filings.fund_registration(
+            "doc_id",
+        )
+        assert_matches_type(FilingFundRegistrationResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_fund_registration(self, client: Axiora) -> None:
+        response = client.filings.with_raw_response.fund_registration(
+            "doc_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        filing = response.parse()
+        assert_matches_type(FilingFundRegistrationResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_fund_registration(self, client: Axiora) -> None:
+        with client.filings.with_streaming_response.fund_registration(
+            "doc_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            filing = response.parse()
+            assert_matches_type(FilingFundRegistrationResponse, filing, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_fund_registration(self, client: Axiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `doc_id` but received ''"):
+            client.filings.with_raw_response.fund_registration(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_internal_control(self, client: Axiora) -> None:
+        filing = client.filings.internal_control(
+            "doc_id",
+        )
+        assert_matches_type(FilingInternalControlResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_internal_control(self, client: Axiora) -> None:
+        response = client.filings.with_raw_response.internal_control(
+            "doc_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        filing = response.parse()
+        assert_matches_type(FilingInternalControlResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_internal_control(self, client: Axiora) -> None:
+        with client.filings.with_streaming_response.internal_control(
+            "doc_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            filing = response.parse()
+            assert_matches_type(FilingInternalControlResponse, filing, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_internal_control(self, client: Axiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `doc_id` but received ''"):
+            client.filings.with_raw_response.internal_control(
+                "",
+            )
+
 
 class TestAsyncFilings:
     parametrize = pytest.mark.parametrize(
@@ -470,4 +556,88 @@ class TestAsyncFilings:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `doc_id` but received ''"):
             await async_client.filings.with_raw_response.retrieve_translations(
                 doc_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_fund_registration(self, async_client: AsyncAxiora) -> None:
+        filing = await async_client.filings.fund_registration(
+            "doc_id",
+        )
+        assert_matches_type(FilingFundRegistrationResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_fund_registration(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.filings.with_raw_response.fund_registration(
+            "doc_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        filing = await response.parse()
+        assert_matches_type(FilingFundRegistrationResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_fund_registration(self, async_client: AsyncAxiora) -> None:
+        async with async_client.filings.with_streaming_response.fund_registration(
+            "doc_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            filing = await response.parse()
+            assert_matches_type(FilingFundRegistrationResponse, filing, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_fund_registration(self, async_client: AsyncAxiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `doc_id` but received ''"):
+            await async_client.filings.with_raw_response.fund_registration(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_internal_control(self, async_client: AsyncAxiora) -> None:
+        filing = await async_client.filings.internal_control(
+            "doc_id",
+        )
+        assert_matches_type(FilingInternalControlResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_internal_control(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.filings.with_raw_response.internal_control(
+            "doc_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        filing = await response.parse()
+        assert_matches_type(FilingInternalControlResponse, filing, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_internal_control(self, async_client: AsyncAxiora) -> None:
+        async with async_client.filings.with_streaming_response.internal_control(
+            "doc_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            filing = await response.parse()
+            assert_matches_type(FilingInternalControlResponse, filing, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_internal_control(self, async_client: AsyncAxiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `doc_id` but received ''"):
+            await async_client.filings.with_raw_response.internal_control(
+                "",
             )
