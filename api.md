@@ -54,6 +54,7 @@ from axiora.types import (
     CompanyRetrieveRatiosResponse,
     CompanyRetrieveSubsidiariesResponse,
     Subsidiary,
+    CompanyForecastRevisionsResponse,
 )
 ```
 
@@ -75,6 +76,7 @@ Methods:
 - <code title="get /v1/companies/{code}/subsidiaries">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_subsidiaries</a>(code, \*\*<a href="src/axiora/types/company_retrieve_subsidiaries_params.py">params</a>) -> <a href="./src/axiora/types/company_retrieve_subsidiaries_response.py">CompanyRetrieveSubsidiariesResponse</a></code>
 - <code title="get /v1/companies/{code}/sections">client.companies.<a href="./src/axiora/resources/companies/companies.py">retrieve_sections</a>(code, \*\*<a href="src/axiora/types/company_retrieve_sections_params.py">params</a>) -> <a href="./src/axiora/types/list_response_section.py">ListResponseSection</a></code>
 - <code title="get /v1/companies/search">client.companies.<a href="./src/axiora/resources/companies/companies.py">search</a>(\*\*<a href="src/axiora/types/company_search_params.py">params</a>) -> <a href="./src/axiora/types/list_response_company.py">ListResponseCompany</a></code>
+- <code title="get /v1/companies/{code}/forecast-revisions">client.companies.<a href="./src/axiora/resources/companies.py">forecast_revisions</a>(code, \*\*<a href="src/axiora/types/company_forecast_revisions_params.py">params</a>) -> <a href="./src/axiora/types/company_forecast_revisions_response.py">CompanyForecastRevisionsResponse</a></code>
 
 ## Buybacks
 
@@ -171,6 +173,8 @@ from axiora.types import (
     FilingListResponse,
     FilingCalendarResponse,
     FilingRetrieveTranslationsResponse,
+    FilingFundRegistrationResponse,
+    FilingInternalControlResponse,
 )
 ```
 
@@ -181,6 +185,8 @@ Methods:
 - <code title="get /v1/filings/calendar">client.filings.<a href="./src/axiora/resources/filings.py">calendar</a>(\*\*<a href="src/axiora/types/filing_calendar_params.py">params</a>) -> <a href="./src/axiora/types/filing_calendar_response.py">FilingCalendarResponse</a></code>
 - <code title="get /v1/filings/{doc_id}/sections">client.filings.<a href="./src/axiora/resources/filings.py">retrieve_sections</a>(doc_id, \*\*<a href="src/axiora/types/filing_retrieve_sections_params.py">params</a>) -> <a href="./src/axiora/types/list_response_section.py">ListResponseSection</a></code>
 - <code title="get /v1/filings/{doc_id}/translations">client.filings.<a href="./src/axiora/resources/filings.py">retrieve_translations</a>(doc_id, \*\*<a href="src/axiora/types/filing_retrieve_translations_params.py">params</a>) -> <a href="./src/axiora/types/filing_retrieve_translations_response.py">FilingRetrieveTranslationsResponse</a></code>
+- <code title="get /v1/filings/{doc_id}/fund-registration">client.filings.<a href="./src/axiora/resources/filings.py">fund_registration</a>(doc_id) -> <a href="./src/axiora/types/filing_fund_registration_response.py">FilingFundRegistrationResponse</a></code>
+- <code title="get /v1/filings/{doc_id}/internal-control">client.filings.<a href="./src/axiora/resources/filings.py">internal_control</a>(doc_id) -> <a href="./src/axiora/types/filing_internal_control_response.py">FilingInternalControlResponse</a></code>
 
 # Translations
 
@@ -324,9 +330,16 @@ Methods:
 
 # Batch
 
+Types:
+
+```python
+from axiora.types import BatchIdentifiersResponse
+```
+
 Methods:
 
 - <code title="post /v1/batch/financials">client.batch.<a href="./src/axiora/resources/batch.py">fetch_financials</a>(\*\*<a href="src/axiora/types/batch_fetch_financials_params.py">params</a>) -> <a href="./src/axiora/types/list_response_financial.py">ListResponseFinancial</a></code>
+- <code title="post /v1/batch/identifiers">client.batch.<a href="./src/axiora/resources/batch.py">identifiers</a>(\*\*<a href="src/axiora/types/batch_identifiers_params.py">params</a>) -> <a href="./src/axiora/types/batch_identifiers_response.py">BatchIdentifiersResponse</a></code>
 
 # Waitlist
 
@@ -522,3 +535,37 @@ Methods:
 
 - <code title="get /oauth/authorize">client.oauth.authorize.<a href="./src/axiora/resources/oauth/authorize.py">show</a>(\*\*<a href="src/axiora/types/oauth/authorize_show_params.py">params</a>) -> str</code>
 - <code title="post /oauth/authorize">client.oauth.authorize.<a href="./src/axiora/resources/oauth/authorize.py">validate</a>(\*\*<a href="src/axiora/types/oauth/authorize_validate_params.py">params</a>) -> object</code>
+
+# Identifiers
+
+Types:
+
+```python
+from axiora.types import IdentifierListResponse
+```
+
+Methods:
+
+- <code title="get /v1/identifiers">client.identifiers.<a href="./src/axiora/resources/identifiers.py">list</a>(\*\*<a href="src/axiora/types/identifier_list_params.py">params</a>) -> <a href="./src/axiora/types/identifier_list_response.py">IdentifierListResponse</a></code>
+
+# V2
+
+Types:
+
+```python
+from axiora.types import V2ListChangesResponse, V2RetrieveCompanyResponse, V2ListEntitiesResponse, V2RetrieveEntityResponse, V2ListFactsResponse, V2ListFilingsResponse, V2RetrieveFilingResponse, V2RetrieveHolderResponse, V2ListPositionsResponse, V2SearchResponse, V2ListTypesResponse
+```
+
+Methods:
+
+- <code title="get /v2/changes">client.v2.<a href="./src/axiora/resources/v2.py">list_changes</a>(\*\*<a href="src/axiora/types/v2_list_changes_params.py">params</a>) -> <a href="./src/axiora/types/v2_list_changes_response.py">V2ListChangesResponse</a></code>
+- <code title="get /v2/companies/{code}">client.v2.<a href="./src/axiora/resources/v2.py">retrieve_company</a>(code, \*\*<a href="src/axiora/types/v2_retrieve_company_params.py">params</a>) -> <a href="./src/axiora/types/v2_retrieve_company_response.py">V2RetrieveCompanyResponse</a></code>
+- <code title="get /v2/entities">client.v2.<a href="./src/axiora/resources/v2.py">list_entities</a>(\*\*<a href="src/axiora/types/v2_list_entities_params.py">params</a>) -> <a href="./src/axiora/types/v2_list_entities_response.py">V2ListEntitiesResponse</a></code>
+- <code title="get /v2/entities/{entity_id}">client.v2.<a href="./src/axiora/resources/v2.py">retrieve_entity</a>(entity_id, \*\*<a href="src/axiora/types/v2_retrieve_entity_params.py">params</a>) -> <a href="./src/axiora/types/v2_retrieve_entity_response.py">V2RetrieveEntityResponse</a></code>
+- <code title="get /v2/facts">client.v2.<a href="./src/axiora/resources/v2.py">list_facts</a>(\*\*<a href="src/axiora/types/v2_list_facts_params.py">params</a>) -> <a href="./src/axiora/types/v2_list_facts_response.py">V2ListFactsResponse</a></code>
+- <code title="get /v2/filings">client.v2.<a href="./src/axiora/resources/v2.py">list_filings</a>(\*\*<a href="src/axiora/types/v2_list_filings_params.py">params</a>) -> <a href="./src/axiora/types/v2_list_filings_response.py">V2ListFilingsResponse</a></code>
+- <code title="get /v2/filings/{doc_id}">client.v2.<a href="./src/axiora/resources/v2.py">retrieve_filing</a>(doc_id) -> <a href="./src/axiora/types/v2_retrieve_filing_response.py">V2RetrieveFilingResponse</a></code>
+- <code title="get /v2/holders/{holder_code}">client.v2.<a href="./src/axiora/resources/v2.py">retrieve_holder</a>(holder_code, \*\*<a href="src/axiora/types/v2_retrieve_holder_params.py">params</a>) -> <a href="./src/axiora/types/v2_retrieve_holder_response.py">V2RetrieveHolderResponse</a></code>
+- <code title="get /v2/positions">client.v2.<a href="./src/axiora/resources/v2.py">list_positions</a>(\*\*<a href="src/axiora/types/v2_list_positions_params.py">params</a>) -> <a href="./src/axiora/types/v2_list_positions_response.py">V2ListPositionsResponse</a></code>
+- <code title="get /v2/search">client.v2.<a href="./src/axiora/resources/v2.py">search</a>(\*\*<a href="src/axiora/types/v2_search_params.py">params</a>) -> <a href="./src/axiora/types/v2_search_response.py">V2SearchResponse</a></code>
+- <code title="get /v2/types">client.v2.<a href="./src/axiora/resources/v2.py">list_types</a>() -> <a href="./src/axiora/types/v2_list_types_response.py">V2ListTypesResponse</a></code>

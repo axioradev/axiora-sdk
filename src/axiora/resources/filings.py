@@ -28,6 +28,8 @@ from ..types.filing_list_response import FilingListResponse
 from ..types.list_response_section import ListResponseSection
 from ..types.filing_calendar_response import FilingCalendarResponse
 from ..types.filing_retrieve_response import FilingRetrieveResponse
+from ..types.filing_internal_control_response import FilingInternalControlResponse
+from ..types.filing_fund_registration_response import FilingFundRegistrationResponse
 from ..types.filing_retrieve_translations_response import FilingRetrieveTranslationsResponse
 
 __all__ = ["FilingsResource", "AsyncFilingsResource"]
@@ -288,6 +290,81 @@ class FilingsResource(SyncAPIResource):
             cast_to=FilingRetrieveTranslationsResponse,
         )
 
+    def fund_registration(
+        self,
+        doc_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> FilingFundRegistrationResponse:
+        """
+        Read a fund registration and its official-source amendment relationship.
+
+        edinet_code and issuer_name identify the filing issuer or manager. fund_name
+        retains the filed fund identity; foreign covers may supply no G-code. Offering
+        caps remain filed text. Each original
+        and amendment remains readable by its own document ID.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not doc_id:
+            raise ValueError(f"Expected a non-empty value for `doc_id` but received {doc_id!r}")
+        return self._get(
+            path_template("/v1/filings/{doc_id}/fund-registration", doc_id=doc_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FilingFundRegistrationResponse,
+        )
+
+    def internal_control(
+        self,
+        doc_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> FilingInternalControlResponse:
+        """
+        Read this document's internal-control conclusion and filed source facts.
+
+        Historical documents remain readable by ID. An amendment identifies the source
+        document it corrects in amends_doc_id. Unknown conclusions carry a parse warning;
+        absence of a parsed report returns NOT_FOUND.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not doc_id:
+            raise ValueError(f"Expected a non-empty value for `doc_id` but received {doc_id!r}")
+        return self._get(
+            path_template("/v1/filings/{doc_id}/internal-control", doc_id=doc_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FilingInternalControlResponse,
+        )
+
 
 class AsyncFilingsResource(AsyncAPIResource):
     @cached_property
@@ -544,6 +621,81 @@ class AsyncFilingsResource(AsyncAPIResource):
             cast_to=FilingRetrieveTranslationsResponse,
         )
 
+    async def fund_registration(
+        self,
+        doc_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> FilingFundRegistrationResponse:
+        """
+        Read a fund registration and its official-source amendment relationship.
+
+        edinet_code and issuer_name identify the filing issuer or manager. fund_name
+        retains the filed fund identity; foreign covers may supply no G-code. Offering
+        caps remain filed text. Each original
+        and amendment remains readable by its own document ID.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not doc_id:
+            raise ValueError(f"Expected a non-empty value for `doc_id` but received {doc_id!r}")
+        return await self._get(
+            path_template("/v1/filings/{doc_id}/fund-registration", doc_id=doc_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FilingFundRegistrationResponse,
+        )
+
+    async def internal_control(
+        self,
+        doc_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> FilingInternalControlResponse:
+        """
+        Read this document's internal-control conclusion and filed source facts.
+
+        Historical documents remain readable by ID. An amendment identifies the source
+        document it corrects in amends_doc_id. Unknown conclusions carry a parse warning;
+        absence of a parsed report returns NOT_FOUND.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not doc_id:
+            raise ValueError(f"Expected a non-empty value for `doc_id` but received {doc_id!r}")
+        return await self._get(
+            path_template("/v1/filings/{doc_id}/internal-control", doc_id=doc_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FilingInternalControlResponse,
+        )
+
 
 class FilingsResourceWithRawResponse:
     def __init__(self, filings: FilingsResource) -> None:
@@ -563,6 +715,12 @@ class FilingsResourceWithRawResponse:
         )
         self.retrieve_translations = to_raw_response_wrapper(
             filings.retrieve_translations,
+        )
+        self.fund_registration = to_raw_response_wrapper(
+            filings.fund_registration,
+        )
+        self.internal_control = to_raw_response_wrapper(
+            filings.internal_control,
         )
 
 
@@ -585,6 +743,12 @@ class AsyncFilingsResourceWithRawResponse:
         self.retrieve_translations = async_to_raw_response_wrapper(
             filings.retrieve_translations,
         )
+        self.fund_registration = async_to_raw_response_wrapper(
+            filings.fund_registration,
+        )
+        self.internal_control = async_to_raw_response_wrapper(
+            filings.internal_control,
+        )
 
 
 class FilingsResourceWithStreamingResponse:
@@ -606,6 +770,12 @@ class FilingsResourceWithStreamingResponse:
         self.retrieve_translations = to_streamed_response_wrapper(
             filings.retrieve_translations,
         )
+        self.fund_registration = to_streamed_response_wrapper(
+            filings.fund_registration,
+        )
+        self.internal_control = to_streamed_response_wrapper(
+            filings.internal_control,
+        )
 
 
 class AsyncFilingsResourceWithStreamingResponse:
@@ -626,4 +796,10 @@ class AsyncFilingsResourceWithStreamingResponse:
         )
         self.retrieve_translations = async_to_streamed_response_wrapper(
             filings.retrieve_translations,
+        )
+        self.fund_registration = async_to_streamed_response_wrapper(
+            filings.fund_registration,
+        )
+        self.internal_control = async_to_streamed_response_wrapper(
+            filings.internal_control,
         )

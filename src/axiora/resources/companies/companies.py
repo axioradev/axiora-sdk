@@ -16,6 +16,7 @@ from ...types import (
     company_retrieve_growth_params,
     company_retrieve_ratios_params,
     company_retrieve_sections_params,
+    company_forecast_revisions_params,
     company_list_shareholdings_params,
     company_list_voting_results_params,
     company_retrieve_financials_params,
@@ -76,6 +77,7 @@ from ...types.company_retrieve_peers_response import CompanyRetrievePeersRespons
 from ...types.company_retrieve_growth_response import CompanyRetrieveGrowthResponse
 from ...types.company_retrieve_health_response import CompanyRetrieveHealthResponse
 from ...types.company_retrieve_ratios_response import CompanyRetrieveRatiosResponse
+from ...types.company_forecast_revisions_response import CompanyForecastRevisionsResponse
 from ...types.company_retrieve_identifiers_response import CompanyRetrieveIdentifiersResponse
 from ...types.company_get_board_composition_response import CompanyGetBoardCompositionResponse
 from ...types.company_retrieve_subsidiaries_response import CompanyRetrieveSubsidiariesResponse
@@ -904,6 +906,58 @@ class CompaniesResource(SyncAPIResource):
             cast_to=ListResponseCompany,
         )
 
+    def forecast_revisions(
+        self,
+        code: str,
+        *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyForecastRevisionsResponse:
+        """
+        Get previous and revised management guidance from official revision notices.
+
+        Monetary values are integer JPY. EPS is JPY per share. Target periods and
+        consolidated/nonconsolidated guidance remain separate. Null means no reported
+        numeric value; *_unreported_fields identifies explicitly nil or dash facts.
+        Pagination follows captured source notices. Sources includes PDF-only and
+        held notices; data contains structured guidance for parsed sources on that
+        page. This endpoint covers captured notices, not full history.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return self._get(
+            path_template("/v1/companies/{code}/forecast-revisions", code=code),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    company_forecast_revisions_params.CompanyForecastRevisionsParams,
+                ),
+            ),
+            cast_to=CompanyForecastRevisionsResponse,
+        )
+
 
 class AsyncCompaniesResource(AsyncAPIResource):
     @cached_property
@@ -1729,6 +1783,58 @@ class AsyncCompaniesResource(AsyncAPIResource):
             cast_to=ListResponseCompany,
         )
 
+    async def forecast_revisions(
+        self,
+        code: str,
+        *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CompanyForecastRevisionsResponse:
+        """
+        Get previous and revised management guidance from official revision notices.
+
+        Monetary values are integer JPY. EPS is JPY per share. Target periods and
+        consolidated/nonconsolidated guidance remain separate. Null means no reported
+        numeric value; *_unreported_fields identifies explicitly nil or dash facts.
+        Pagination follows captured source notices. Sources includes PDF-only and
+        held notices; data contains structured guidance for parsed sources on that
+        page. This endpoint covers captured notices, not full history.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not code:
+            raise ValueError(f"Expected a non-empty value for `code` but received {code!r}")
+        return await self._get(
+            path_template("/v1/companies/{code}/forecast-revisions", code=code),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    company_forecast_revisions_params.CompanyForecastRevisionsParams,
+                ),
+            ),
+            cast_to=CompanyForecastRevisionsResponse,
+        )
+
 
 class CompaniesResourceWithRawResponse:
     def __init__(self, companies: CompaniesResource) -> None:
@@ -1781,6 +1887,9 @@ class CompaniesResourceWithRawResponse:
         )
         self.search = to_raw_response_wrapper(
             companies.search,
+        )
+        self.forecast_revisions = to_raw_response_wrapper(
+            companies.forecast_revisions,
         )
 
     @cached_property
@@ -1852,6 +1961,9 @@ class AsyncCompaniesResourceWithRawResponse:
         self.search = async_to_raw_response_wrapper(
             companies.search,
         )
+        self.forecast_revisions = async_to_raw_response_wrapper(
+            companies.forecast_revisions,
+        )
 
     @cached_property
     def buybacks(self) -> AsyncBuybacksResourceWithRawResponse:
@@ -1922,6 +2034,9 @@ class CompaniesResourceWithStreamingResponse:
         self.search = to_streamed_response_wrapper(
             companies.search,
         )
+        self.forecast_revisions = to_streamed_response_wrapper(
+            companies.forecast_revisions,
+        )
 
     @cached_property
     def buybacks(self) -> BuybacksResourceWithStreamingResponse:
@@ -1991,6 +2106,9 @@ class AsyncCompaniesResourceWithStreamingResponse:
         )
         self.search = async_to_streamed_response_wrapper(
             companies.search,
+        )
+        self.forecast_revisions = async_to_streamed_response_wrapper(
+            companies.forecast_revisions,
         )
 
     @cached_property

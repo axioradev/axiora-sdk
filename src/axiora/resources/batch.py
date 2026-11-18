@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ..types import batch_fetch_financials_params
+from ..types import batch_identifiers_params, batch_fetch_financials_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,6 +19,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.list_response_financial import ListResponseFinancial
+from ..types.batch_identifiers_response import BatchIdentifiersResponse
 
 __all__ = ["BatchResource", "AsyncBatchResource"]
 
@@ -93,6 +94,49 @@ class BatchResource(SyncAPIResource):
             cast_to=ListResponseFinancial,
         )
 
+    def identifiers(
+        self,
+        *,
+        ids: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BatchIdentifiersResponse:
+        """
+        Resolve up to 100 identifiers of any kind in one request.
+
+        Every input is accounted for: identifiers that match no entity are named in
+        `meta.unresolved` rather than dropped, so a caller can always reconcile the
+        response against what they sent.
+
+        Args:
+          ids: Identifiers to resolve (1-100). Any mix of EDINET codes, securities codes and investor identifiers.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/batch/identifiers",
+            body=maybe_transform(
+                {
+                    "ids": ids,
+                },
+                batch_identifiers_params.BatchIdentifiersParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BatchIdentifiersResponse,
+        )
+
 
 class AsyncBatchResource(AsyncAPIResource):
     @cached_property
@@ -164,6 +208,49 @@ class AsyncBatchResource(AsyncAPIResource):
             cast_to=ListResponseFinancial,
         )
 
+    async def identifiers(
+        self,
+        *,
+        ids: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BatchIdentifiersResponse:
+        """
+        Resolve up to 100 identifiers of any kind in one request.
+
+        Every input is accounted for: identifiers that match no entity are named in
+        `meta.unresolved` rather than dropped, so a caller can always reconcile the
+        response against what they sent.
+
+        Args:
+          ids: Identifiers to resolve (1-100). Any mix of EDINET codes, securities codes and investor identifiers.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/batch/identifiers",
+            body=await async_maybe_transform(
+                {
+                    "ids": ids,
+                },
+                batch_identifiers_params.BatchIdentifiersParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BatchIdentifiersResponse,
+        )
+
 
 class BatchResourceWithRawResponse:
     def __init__(self, batch: BatchResource) -> None:
@@ -171,6 +258,9 @@ class BatchResourceWithRawResponse:
 
         self.fetch_financials = to_raw_response_wrapper(
             batch.fetch_financials,
+        )
+        self.identifiers = to_raw_response_wrapper(
+            batch.identifiers,
         )
 
 
@@ -181,6 +271,9 @@ class AsyncBatchResourceWithRawResponse:
         self.fetch_financials = async_to_raw_response_wrapper(
             batch.fetch_financials,
         )
+        self.identifiers = async_to_raw_response_wrapper(
+            batch.identifiers,
+        )
 
 
 class BatchResourceWithStreamingResponse:
@@ -190,6 +283,9 @@ class BatchResourceWithStreamingResponse:
         self.fetch_financials = to_streamed_response_wrapper(
             batch.fetch_financials,
         )
+        self.identifiers = to_streamed_response_wrapper(
+            batch.identifiers,
+        )
 
 
 class AsyncBatchResourceWithStreamingResponse:
@@ -198,4 +294,7 @@ class AsyncBatchResourceWithStreamingResponse:
 
         self.fetch_financials = async_to_streamed_response_wrapper(
             batch.fetch_financials,
+        )
+        self.identifiers = async_to_streamed_response_wrapper(
+            batch.identifiers,
         )

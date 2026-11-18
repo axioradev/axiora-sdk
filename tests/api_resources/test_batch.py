@@ -9,7 +9,7 @@ import pytest
 
 from axiora import Axiora, AsyncAxiora
 from tests.utils import assert_matches_type
-from axiora.types import ListResponseFinancial
+from axiora.types import ListResponseFinancial, BatchIdentifiersResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -61,6 +61,40 @@ class TestBatch:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_identifiers(self, client: Axiora) -> None:
+        batch = client.batch.identifiers(
+            ids=["ids"],
+        )
+        assert_matches_type(BatchIdentifiersResponse, batch, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_identifiers(self, client: Axiora) -> None:
+        response = client.batch.with_raw_response.identifiers(
+            ids=["ids"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        batch = response.parse()
+        assert_matches_type(BatchIdentifiersResponse, batch, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_identifiers(self, client: Axiora) -> None:
+        with client.batch.with_streaming_response.identifiers(
+            ids=["ids"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            batch = response.parse()
+            assert_matches_type(BatchIdentifiersResponse, batch, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncBatch:
     parametrize = pytest.mark.parametrize(
@@ -108,5 +142,39 @@ class TestAsyncBatch:
 
             batch = await response.parse()
             assert_matches_type(ListResponseFinancial, batch, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_identifiers(self, async_client: AsyncAxiora) -> None:
+        batch = await async_client.batch.identifiers(
+            ids=["ids"],
+        )
+        assert_matches_type(BatchIdentifiersResponse, batch, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_identifiers(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.batch.with_raw_response.identifiers(
+            ids=["ids"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        batch = await response.parse()
+        assert_matches_type(BatchIdentifiersResponse, batch, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_identifiers(self, async_client: AsyncAxiora) -> None:
+        async with async_client.batch.with_streaming_response.identifiers(
+            ids=["ids"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            batch = await response.parse()
+            assert_matches_type(BatchIdentifiersResponse, batch, path=["response"])
 
         assert cast(Any, response.is_closed) is True

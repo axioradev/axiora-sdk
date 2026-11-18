@@ -21,6 +21,7 @@ from axiora.types import (
     CompanyRetrieveGrowthResponse,
     CompanyRetrieveHealthResponse,
     CompanyRetrieveRatiosResponse,
+    CompanyForecastRevisionsResponse,
     CompanyGetBoardCompositionResponse,
     CompanyRetrieveIdentifiersResponse,
     CompanyGetCapitalAllocationResponse,
@@ -822,6 +823,58 @@ class TestCompanies:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_forecast_revisions(self, client: Axiora) -> None:
+        company = client.companies.forecast_revisions(
+            "code",
+        )
+        assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_forecast_revisions_with_all_params(self, client: Axiora) -> None:
+        company = client.companies.forecast_revisions(
+            "code",
+            limit=1,
+            offset=1,
+        )
+        assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_forecast_revisions(self, client: Axiora) -> None:
+        response = client.companies.with_raw_response.forecast_revisions(
+            "code",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        company = response.parse()
+        assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_forecast_revisions(self, client: Axiora) -> None:
+        with client.companies.with_streaming_response.forecast_revisions(
+            "code",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            company = response.parse()
+            assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_forecast_revisions(self, client: Axiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
+            client.companies.with_raw_response.forecast_revisions(
+                "",
+            )
+
 
 class TestAsyncCompanies:
     parametrize = pytest.mark.parametrize(
@@ -1615,3 +1668,55 @@ class TestAsyncCompanies:
             assert_matches_type(ListResponseCompany, company, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_forecast_revisions(self, async_client: AsyncAxiora) -> None:
+        company = await async_client.companies.forecast_revisions(
+            "code",
+        )
+        assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_forecast_revisions_with_all_params(self, async_client: AsyncAxiora) -> None:
+        company = await async_client.companies.forecast_revisions(
+            "code",
+            limit=1,
+            offset=1,
+        )
+        assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_forecast_revisions(self, async_client: AsyncAxiora) -> None:
+        response = await async_client.companies.with_raw_response.forecast_revisions(
+            "code",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        company = await response.parse()
+        assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_forecast_revisions(self, async_client: AsyncAxiora) -> None:
+        async with async_client.companies.with_streaming_response.forecast_revisions(
+            "code",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            company = await response.parse()
+            assert_matches_type(CompanyForecastRevisionsResponse, company, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_forecast_revisions(self, async_client: AsyncAxiora) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `code` but received ''"):
+            await async_client.companies.with_raw_response.forecast_revisions(
+                "",
+            )
